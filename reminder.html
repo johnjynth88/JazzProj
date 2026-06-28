@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reminder - Smart School Learning Portal</title>
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="theme-light">
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-section">
+                <div class="logo-icon">📚</div>
+                <h1>Smart Learning Portal</h1>
+            </a>
+            <div class="header-middle">
+                <input type="text" class="search-box" placeholder="Search reminders..." />
+            </div>
+            <div class="header-actions">
+                <button class="action-btn" title="Back">←</button>
+            </div>
+            <button class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="flex-between mb-4">
+            <h1>📋 Reminders</h1>
+            <button class="btn btn-primary" id="addReminderBtn">+ Add Reminder</button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="login-tabs mb-4">
+            <button class="tab-btn active" data-tab="all">All</button>
+            <button class="tab-btn" data-tab="today">Today</button>
+            <button class="tab-btn" data-tab="upcoming">Upcoming</button>
+            <button class="tab-btn" data-tab="completed">Completed</button>
+        </div>
+
+        <!-- Reminders List -->
+        <div class="grid-auto" id="remindersList">
+            <!-- Reminders will be loaded here -->
+        </div>
+    </main>
+
+    <!-- Add/Edit Reminder Modal -->
+    <div class="modal" id="reminderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Add Reminder</h2>
+                <button class="modal-close" id="closeModal">✕</button>
+            </div>
+            
+            <form id="reminderForm">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" placeholder="Reminder title" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Time</label>
+                        <input type="time" id="time" name="time" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" name="category" required>
+                        <option value="homework">Homework</option>
+                        <option value="exam">Exam</option>
+                        <option value="project">Project</option>
+                        <option value="sports">Sports</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" placeholder="Add details..." rows="4"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="priority">Priority</label>
+                        <select id="priority" name="priority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="repeat">Repeat</label>
+                        <select id="repeat" name="repeat">
+                            <option value="none">Never</option>
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex-between" style="gap: 1rem; margin-top: 2rem;">
+                    <button type="button" class="btn btn-outline" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Reminder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        let reminders = [];
+        let currentTab = 'all';
+        let editingId = null;
+
+        function loadReminders() {
+            reminders = StorageManager.getReminders();
+            renderReminders();
+        }
+
+        function renderReminders() {
+            const container = document.getElementById('remindersList');
+            container.innerHTML = '';
+
+            const filtered = reminders.filter(reminder => {
+                if (currentTab === 'today') {
+                    return Utils.isToday(reminder.date);
+                } else if (currentTab === 'upcoming') {
+                    return new Date(reminder.date) > new Date();
+                } else if (currentTab === 'completed') {
+                    return reminder.completed;
+                }
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="card" style="grid-column: 1/-1; text-align: center;"><p>No reminders found</p></div>';
+                return;
+            }
+
+            filtered.forEach((reminder, index) => {
+                const reminderEl = document.createElement('div');
+                reminderEl.className = 'card stagger-item';
+                reminderEl.innerHTML = `
+                    <div class="flex-between mb-2">
+                        <h3>${reminder.title}</h3>
+                        <input type="checkbox" ${reminder.completed ? 'checked' : ''} onchange="toggleReminder(${reminder.id})">
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">${reminder.category}</p>
+                    <p style="margin-top: 0.5rem;">${reminder.description}</p>
+                    <div class="flex-between mt-3">
+                        <div>
+                            <span class="badge badge-${reminder.priority}">${reminder.priority}</span>
+                            <span class="badge badge-info" style="margin-left: 0.5rem;">${Utils.formatDate(reminder.date, 'DD/MM')} ${reminder.time}</span>
+                        </div>
+                        <div>
+                            <button class="btn btn-outline" onclick="editReminder(${reminder.id})" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Edit</button>
+                            <button class="btn btn-danger" onclick="deleteReminder(${reminder.id})" style="padding: 0.5rem 1rem; font-size: 0.85rem; margin-left: 0.5rem;">Delete</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(reminderEl);
+            });
+        }
+
+        // Add Reminder Button
+        document.getElementById('addReminderBtn').addEventListener('click', () => {
+            editingId = null;
+            document.getElementById('modalTitle').textContent = 'Add Reminder';
+            document.getElementById('reminderForm').reset();
+            document.getElementById('date').valueAsDate = new Date();
+            document.getElementById('reminderModal').classList.add('active');
+        });
+
+        // Close Modal
+        document.getElementById('closeModal').addEventListener('click', () => {
+            document.getElementById('reminderModal').classList.remove('active');
+        });
+
+        document.getElementById('cancelBtn').addEventListener('click', () => {
+            document.getElementById('reminderModal').classList.remove('active');
+        });
+
+        // Form Submit
+        document.getElementById('reminderForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = {
+                title: document.getElementById('title').value,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value,
+                category: document.getElementById('category').value,
+                description: document.getElementById('description').value,
+                priority: document.getElementById('priority').value,
+                repeat: document.getElementById('repeat').value,
+                completed: false
+            };
+
+            if (editingId) {
+                StorageManager.updateReminder(editingId, formData);
+                Utils.showNotification('Reminder updated!', 'success');
+            } else {
+                StorageManager.addReminder(formData);
+                Utils.showNotification('Reminder added!', 'success');
+            }
+
+            document.getElementById('reminderModal').classList.remove('active');
+            loadReminders();
+        });
+
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentTab = btn.getAttribute('data-tab');
+                renderReminders();
+            });
+        });
+
+        // Edit Reminder
+        function editReminder(id) {
+            const reminder = reminders.find(r => r.id === id);
+            if (reminder) {
+                editingId = id;
+                document.getElementById('modalTitle').textContent = 'Edit Reminder';
+                document.getElementById('title').value = reminder.title;
+                document.getElementById('date').value = reminder.date;
+                document.getElementById('time').value = reminder.time;
+                document.getElementById('category').value = reminder.category;
+                document.getElementById('description').value = reminder.description;
+                document.getElementById('priority').value = reminder.priority;
+                document.getElementById('repeat').value = reminder.repeat;
+                document.getElementById('reminderModal').classList.add('active');
+            }
+        }
+
+        // Toggle Reminder Completion
+        function toggleReminder(id) {
+            const reminder = reminders.find(r => r.id === id);
+            if (reminder) {
+                reminder.completed = !reminder.completed;
+                StorageManager.updateReminder(id, reminder);
+                loadReminders();
+            }
+        }
+
+        // Delete Reminder
+        function deleteReminder(id) {
+            if (confirm('Delete this reminder?')) {
+                StorageManager.deleteReminder(id);
+                Utils.showNotification('Reminder deleted!', 'success');
+                loadReminders();
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!StorageManager.getUser()) {
+                window.location.href = 'login.html';
+                return;
+            }
+            loadReminders();
+        });
+    </script>
+</body>
+</html>

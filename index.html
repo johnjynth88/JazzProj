@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart School Learning Portal</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="css/games.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="theme-light">
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-section">
+                <div class="logo-icon">📚</div>
+                <h1 data-i18n="header.schoolName">Smart Learning Portal</h1>
+            </a>
+
+            <div class="header-middle">
+                <input type="text" class="search-box" placeholder="Search..." data-i18n="header.search" />
+            </div>
+
+            <div class="header-selectors">
+                <select class="selector" id="languageSelect" data-i18n="header.language">
+                    <option value="english">English</option>
+                    <option value="tamil">Tamil</option>
+                    <option value="french">Français</option>
+                    <option value="hindi">हिंदी</option>
+                </select>
+                <select class="selector" id="countrySelect" data-i18n="header.country">
+                    <option value="india">India</option>
+                    <option value="usa">USA</option>
+                    <option value="uk">UK</option>
+                </select>
+                <select class="selector" id="themeSelect" data-i18n="header.theme">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="school">School</option>
+                    <option value="nature">Nature</option>
+                    <option value="space">Space</option>
+                    <option value="cartoon">Cartoon</option>
+                    <option value="rainbow">Rainbow</option>
+                </select>
+            </div>
+
+            <div class="header-actions">
+                <button class="action-btn" data-notification title="Notifications">🔔
+                    <span class="notification-badge">3</span>
+                </button>
+                <button class="action-btn" data-profile title="Profile">👤</button>
+                <button class="action-btn" title="Settings">⚙️</button>
+            </div>
+
+            <button class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Welcome Section -->
+        <section class="card mb-4 animate-fade-in" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white;">
+            <div class="flex-between">
+                <div>
+                    <h2 data-i18n="home.welcome">Welcome</h2>
+                    <p data-i18n="home.greeting">Good Morning!</p>
+                    <p data-i18n="home.quote" style="font-size: 0.95rem; margin-top: 1rem; font-style: italic;"></p>
+                </div>
+                <div style="font-size: 4rem;">🎓</div>
+            </div>
+        </section>
+
+        <!-- Today's Stats -->
+        <div class="grid-3 mb-4">
+            <div class="card text-center">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">⏰</div>
+                <h3 data-i18n="home.reminder">Today's Reminder</h3>
+                <p style="font-size: 1.5rem; color: var(--primary-color); font-weight: 700;">5</p>
+            </div>
+            <div class="card text-center">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎮</div>
+                <h3 data-i18n="home.progress">Your Progress</h3>
+                <div class="progress" style="margin-top: 1rem;">
+                    <div class="progress-bar" style="width: 65%;"></div>
+                </div>
+                <p style="font-size: 0.85rem; margin-top: 0.5rem; color: var(--text-secondary);">65%</p>
+            </div>
+            <div class="card text-center">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏆</div>
+                <h3 data-i18n="cards.achievements">Achievements</h3>
+                <p style="font-size: 1.5rem; color: var(--accent-color); font-weight: 700;">12</p>
+            </div>
+        </div>
+
+        <!-- What Can I Do For You Section -->
+        <h2 data-i18n="home.whatCanIDo" class="mb-3">What can I do for you?</h2>
+        
+        <div class="grid-auto">
+            <!-- Quick Action Cards -->
+            <div class="card stagger-item hover-lift">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">📝</div>
+                <h3 data-i18n="cards.quiz">Quiz</h3>
+                <p data-i18n="cards.game" style="color: var(--text-secondary); font-size: 0.9rem;">Test your knowledge</p>
+                <a href="quiz.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" data-i18n="common.start">Start</a>
+            </div>
+
+            <div class="card stagger-item hover-lift">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🧩</div>
+                <h3 data-i18n="cards.puzzle">Puzzle</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Solve interesting puzzles</p>
+                <a href="puzzle.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" data-i18n="common.start">Start</a>
+            </div>
+
+            <div class="card stagger-item hover-lift">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">⚡</div>
+                <h3 data-i18n="cards.rapidFire">Rapid Fire</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Quick quick questions</p>
+                <a href="rapidfire.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" data-i18n="common.start">Start</a>
+            </div>
+
+            <div class="card stagger-item hover-lift">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">📷</div>
+                <h3 data-i18n="cards.camera">Camera</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Capture moments</p>
+                <a href="camera.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" data-i18n="common.open">Open</a>
+            </div>
+
+            <div class="card stagger-item hover-lift">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🖼️</div>
+                <h3 data-i18n="cards.gallery">Gallery</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">View your photos</p>
+                <a href="gallery.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" data-i18n="common.view">View</a>
+            </div>
+
+            <div class="card stagger-item hover-lift">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">📋</div>
+                <h3 data-i18n="cards.reminder">Reminder</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Manage tasks</p>
+                <a href="reminder.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" data-i18n="common.manage">Manage</a>
+            </div>
+
+            <div class="card stagger-item hover-lift">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">📚</div>
+                <h3 data-i18n="cards.subjects">Subjects</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Learn subjects</p>
+                <a href="subjects.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" data-i18n="common.explore">Explore</a>
+            </div>
+
+            <div class="card stagger-item hover-lift">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">⚙️</div>
+                <h3 data-i18n="cards.settings">Settings</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Customize experience</p>
+                <a href="settings.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" data-i18n="common.configure">Configure</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Action Button -->
+    <button class="fab" id="fabBtn">+</button>
+
+    <!-- FAB Menu -->
+    <div id="fabMenu" style="display: none; position: fixed; bottom: 100px; right: 20px; z-index: 40;">
+        <button class="fab" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-color); width: 45px; height: 45px; font-size: 1.2rem;" title="Camera">📷</button>
+        <button class="fab" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-color); width: 45px; height: 45px; font-size: 1.2rem; margin-top: 0.5rem;" title="Reminder">⏰</button>
+        <button class="fab" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-color); width: 45px; height: 45px; font-size: 1.2rem; margin-top: 0.5rem;" title="Quiz">📝</button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        // Initialize page with quote
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('[data-i18n="home.quote"]').textContent = Utils.getRandomQuote();
+
+            // Language selector
+            document.getElementById('languageSelect').addEventListener('change', (e) => {
+                if (window.portal) {
+                    window.portal.applyLanguage(e.target.value);
+                }
+            });
+
+            // Theme selector
+            document.getElementById('themeSelect').addEventListener('change', (e) => {
+                if (window.portal) {
+                    window.portal.applyTheme(e.target.value);
+                }
+            });
+
+            // Set current language and theme
+            if (window.portal) {
+                document.getElementById('languageSelect').value = window.portal.currentLanguage;
+                document.getElementById('themeSelect').value = window.portal.currentTheme;
+            }
+
+            // FAB Toggle
+            document.getElementById('fabBtn').addEventListener('click', () => {
+                const fabMenu = document.getElementById('fabMenu');
+                fabMenu.style.display = fabMenu.style.display === 'none' ? 'block' : 'none';
+            });
+
+            // Check if user is logged in
+            const user = StorageManager.getUser();
+            if (!user) {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>

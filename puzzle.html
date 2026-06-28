@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle - Smart School Learning Portal</title>
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/games.css">
+</head>
+<body class="theme-light">
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-section">
+                <div class="logo-icon">📚</div>
+                <h1>Smart Learning Portal</h1>
+            </a>
+            <div class="header-actions">
+                <button class="action-btn" title="Back">←</button>
+            </div>
+            <button class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="game-container">
+        <!-- Puzzle Selection -->
+        <div id="puzzleSelection" class="text-center" style="width: 100%; max-width: 1000px;">
+            <h1 class="mb-4">🧩 Puzzle Games</h1>
+            
+            <div style="margin-bottom: 2rem;">
+                <h3>Select Difficulty</h3>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn btn-outline" onclick="setDifficulty('easy')" id="easyBtn">Easy</button>
+                    <button class="btn btn-primary" onclick="setDifficulty('medium')" id="mediumBtn">Medium</button>
+                    <button class="btn btn-outline" onclick="setDifficulty('hard')" id="hardBtn">Hard</button>
+                </div>
+            </div>
+
+            <div class="grid-auto">
+                <div class="game-card hover-lift">
+                    <div class="game-card-image">🔤</div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Word Search</h3>
+                        <p class="game-card-description">Find hidden words</p>
+                        <button class="btn btn-primary" onclick="startPuzzle('wordsearch')" style="width: 100%; margin-top: 1rem;">Play</button>
+                    </div>
+                </div>
+
+                <div class="game-card hover-lift">
+                    <div class="game-card-image">🧠</div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Memory Match</h3>
+                        <p class="game-card-description">Match pairs of cards</p>
+                        <button class="btn btn-primary" onclick="startPuzzle('memory')" style="width: 100%; margin-top: 1rem;">Play</button>
+                    </div>
+                </div>
+
+                <div class="game-card hover-lift">
+                    <div class="game-card-image">🧮</div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Number Puzzle</h3>
+                        <p class="game-card-description">Solve number sequences</p>
+                        <button class="btn btn-primary" onclick="startPuzzle('number')" style="width: 100%; margin-top: 1rem;">Play</button>
+                    </div>
+                </div>
+
+                <div class="game-card hover-lift">
+                    <div class="game-card-image">🎨</div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Color Match</h3>
+                        <p class="game-card-description">Match colors correctly</p>
+                        <button class="btn btn-primary" onclick="startPuzzle('color')" style="width: 100%; margin-top: 1rem;">Play</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Puzzle Game Container -->
+        <div id="puzzleContainer" style="display: none; width: 100%; max-width: 700px;">
+            <div class="quiz-header">
+                <div class="quiz-progress">
+                    <div class="question-counter">
+                        <span id="puzzleInfo">Puzzle</span>
+                        <span id="timerDisplay">Time: 0s</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Word Search Puzzle -->
+            <div id="wordsearchPuzzle" class="quiz-container" style="display: none;">
+                <h2 id="wordSearchTitle">Find the Hidden Words</h2>
+                <p id="wordList" style="margin-bottom: 1rem; font-weight: bold;"></p>
+                <div id="wordSearchGrid" style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem; margin: 2rem 0;"></div>
+                <button class="btn btn-primary" onclick="checkWordSearch()" style="width: 100%; margin-top: 1rem;">Check Answer</button>
+            </div>
+
+            <!-- Memory Match Puzzle -->
+            <div id="memoryPuzzle" class="quiz-container" style="display: none;">
+                <h2>Memory Match - Find Pairs</h2>
+                <p id="matchStats" style="text-align: center; font-weight: bold; margin-bottom: 1rem;">Moves: <span id="moveCount">0</span></p>
+                <div id="memoryGrid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 2rem 0;"></div>
+            </div>
+
+            <!-- Number Puzzle -->
+            <div id="numberPuzzle" class="quiz-container" style="display: none;">
+                <h2>Number Puzzle</h2>
+                <p id="numberQuestion" style="text-align: center; font-size: 1.2rem; margin-bottom: 1rem;"></p>
+                <div id="numberOptions" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 2rem 0;"></div>
+            </div>
+
+            <!-- Color Match Puzzle -->
+            <div id="colorPuzzle" class="quiz-container" style="display: none;">
+                <h2>Match the Colors</h2>
+                <div id="colorLeft" style="display: grid; gap: 1rem; margin-bottom: 2rem;"></div>
+                <div id="colorRight" style="display: grid; gap: 1rem; margin-bottom: 2rem;"></div>
+            </div>
+
+            <div class="flex-between" style="margin-top: 2rem;">
+                <button class="btn btn-outline" onclick="quitPuzzle()">Quit</button>
+                <button class="btn btn-primary" id="hintBtn" onclick="showHint()">💡 Hint</button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" style="display: none;">
+            <div class="result-screen">
+                <div class="result-icon" id="resultIcon">🎉</div>
+                <div class="result-message" id="resultMessage">Great Job!</div>
+
+                <div class="score-display">
+                    <div class="score-item">
+                        <div class="score-label">Moves/Time</div>
+                        <div class="score-value" id="finalResult">Perfect!</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">Difficulty</div>
+                        <div class="score-value" id="difficultyDisplay">Medium</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">Score</div>
+                        <div class="score-value" id="puzzleScore">100</div>
+                    </div>
+                </div>
+
+                <div class="result-buttons">
+                    <button class="btn btn-outline" onclick="location.reload()">Try Again</button>
+                    <button class="btn btn-primary" onclick="goHome()">Home</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        let currentPuzzle = null;
+        let currentDifficulty = 'medium';
+        let gameStartTime = 0;
+        let selectedWordCells = [];
+        let memoryCards = [];
+        let matchedPairs = 0;
+        let moveCount = 0;
+        let currentNumberIndex = 0;
+
+        const wordSearchWords = {
+            easy: ['CAT', 'DOG', 'BIRD'],
+            medium: ['SCIENCE', 'MATH', 'COMPUTER'],
+            hard: ['ALGORITHM', 'PROGRAMMING', 'DATABASE']
+        };
+
+        const numberSequences = {
+            easy: [
+                { sequence: [2, 4, 6, 8], answer: 10, options: [10, 12, 14] },
+                { sequence: [1, 1, 2, 3, 5], answer: 8, options: [7, 8, 9] },
+                { sequence: [10, 20, 30], answer: 40, options: [40, 50, 60] }
+            ],
+            medium: [
+                { sequence: [1, 4, 9, 16], answer: 25, options: [20, 25, 30] },
+                { sequence: [2, 6, 12, 20], answer: 30, options: [28, 30, 32] },
+                { sequence: [1, 2, 4, 7], answer: 11, options: [10, 11, 12] }
+            ],
+            hard: [
+                { sequence: [1, 1, 2, 3, 5, 8], answer: 13, options: [12, 13, 14] },
+                { sequence: [2, 3, 5, 7, 11], answer: 13, options: [12, 13, 14] }
+            ]
+        };
+
+        function setDifficulty(difficulty) {
+            currentDifficulty = difficulty;
+            document.getElementById('easyBtn').classList.remove('btn-primary');
+            document.getElementById('mediumBtn').classList.remove('btn-primary');
+            document.getElementById('hardBtn').classList.remove('btn-primary');
+            
+            if (difficulty === 'easy') {
+                document.getElementById('easyBtn').classList.add('btn-primary');
+            } else if (difficulty === 'medium') {
+                document.getElementById('mediumBtn').classList.add('btn-primary');
+            } else {
+                document.getElementById('hardBtn').classList.add('btn-primary');
+            }
+        }
+
+        function startPuzzle(type) {
+            currentPuzzle = type;
+            gameStartTime = Date.now();
+
+            document.getElementById('puzzleSelection').style.display = 'none';
+            document.getElementById('puzzleContainer').style.display = 'block';
+            document.getElementById('resultsScreen').style.display = 'none';
+
+            document.getElementById('wordsearchPuzzle').style.display = 'none';
+            document.getElementById('memoryPuzzle').style.display = 'none';
+            document.getElementById('numberPuzzle').style.display = 'none';
+            document.getElementById('colorPuzzle').style.display = 'none';
+
+            updateTimer();
+            setInterval(updateTimer, 1000);
+
+            if (type === 'wordsearch') {
+                loadWordSearchPuzzle();
+                document.getElementById('wordsearchPuzzle').style.display = 'block';
+            } else if (type === 'memory') {
+                loadMemoryPuzzle();
+                document.getElementById('memoryPuzzle').style.display = 'block';
+            } else if (type === 'number') {
+                loadNumberPuzzle();
+                document.getElementById('numberPuzzle').style.display = 'block';
+            } else if (type === 'color') {
+                loadColorPuzzle();
+                document.getElementById('colorPuzzle').style.display = 'block';
+            }
+        }
+
+        function updateTimer() {
+            const elapsed = Math.floor((Date.now() - gameStartTime) / 1000);
+            document.getElementById('timerDisplay').textContent = `Time: ${elapsed}s`;
+        }
+
+        // Word Search
+        function loadWordSearchPuzzle() {
+            const words = wordSearchWords[currentDifficulty];
+            document.getElementById('wordList').textContent = 'Find: ' + words.join(', ');
+
+            const grid = document.getElementById('wordSearchGrid');
+            grid.innerHTML = '';
+
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            for (let i = 0; i < 36; i++) {
+                const letter = letters[Math.floor(Math.random() * letters.length)];
+                const cell = document.createElement('div');
+                cell.className = 'word-search-cell';
+                cell.textContent = letter;
+                cell.style.cssText = 'padding: 1rem; background: var(--primary-color); color: white; border-radius: 0.5rem; cursor: pointer; text-align: center; font-weight: bold;';
+                grid.appendChild(cell);
+            }
+        }
+
+        function checkWordSearch() {
+            const score = Math.max(100 - (Math.floor((Date.now() - gameStartTime) / 1000)), 10);
+            finishPuzzle(score, 'Great!');
+        }
+
+        // Memory Match
+        function loadMemoryPuzzle() {
+            const pairs = currentDifficulty === 'easy' ? 4 : currentDifficulty === 'medium' ? 6 : 8;
+            memoryCards = [];
+            matchedPairs = 0;
+            moveCount = 0;
+
+            const symbols = ['🍎', '🍌', '🍊', '🍇', '🍓', '🍒', '🥝', '🍑'];
+            for (let i = 0; i < pairs; i++) {
+                memoryCards.push(symbols[i], symbols[i]);
+            }
+
+            memoryCards = Utils.shuffle(memoryCards);
+
+            const grid = document.getElementById('memoryGrid');
+            grid.innerHTML = '';
+            grid.style.gridTemplateColumns = `repeat(${pairs === 4 ? 2 : 4}, 1fr)`;
+
+            memoryCards.forEach((symbol, index) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.style.cssText = 'padding: 2rem; background: var(--primary-color); color: white; border-radius: 0.5rem; cursor: pointer; text-align: center; font-size: 2rem; aspect-ratio: 1; display: flex; align-items: center; justify-content: center;';
+                card.textContent = '?';
+                card.onclick = () => flipCard(index, card);
+                grid.appendChild(card);
+            });
+        }
+
+        let flipped = [];
+        function flipCard(index, card) {
+            if (flipped.length < 2 && card.textContent === '?') {
+                card.textContent = memoryCards[index];
+                flipped.push({ index, card });
+
+                if (flipped.length === 2) {
+                    moveCount++;
+                    document.getElementById('moveCount').textContent = moveCount;
+
+                    if (memoryCards[flipped[0].index] === memoryCards[flipped[1].index]) {
+                        flipped[0].card.style.opacity = '0.5';
+                        flipped[1].card.style.opacity = '0.5';
+                        matchedPairs++;
+
+                        flipped = [];
+
+                        if (matchedPairs === memoryCards.length / 2) {
+                            const score = Math.max(100 - (moveCount * 5), 10);
+                            finishPuzzle(score, 'Memory Master!');
+                        }
+                    } else {
+                        setTimeout(() => {
+                            flipped[0].card.textContent = '?';
+                            flipped[1].card.textContent = '?';
+                            flipped = [];
+                        }, 1000);
+                    }
+                }
+            }
+        }
+
+        // Number Puzzle
+        function loadNumberPuzzle() {
+            currentNumberIndex = 0;
+            loadNumberQuestion();
+        }
+
+        function loadNumberQuestion() {
+            const sequences = numberSequences[currentDifficulty];
+            if (currentNumberIndex >= sequences.length) {
+                finishPuzzle(100, 'Number Wizard!');
+                return;
+            }
+
+            const puzzle = sequences[currentNumberIndex];
+            document.getElementById('numberQuestion').textContent = 'What comes next? ' + puzzle.sequence.join(', ') + ', ?';
+
+            const options = document.getElementById('numberOptions');
+            options.innerHTML = '';
+
+            puzzle.options.forEach(option => {
+                const btn = document.createElement('button');
+                btn.className = 'btn btn-outline';
+                btn.textContent = option;
+                btn.onclick = () => selectNumberAnswer(option, puzzle.answer);
+                options.appendChild(btn);
+            });
+        }
+
+        function selectNumberAnswer(selected, correct) {
+            if (selected === correct) {
+                currentNumberIndex++;
+                loadNumberQuestion();
+            } else {
+                Utils.showNotification('Try again!', 'danger');
+            }
+        }
+
+        // Color Match
+        function loadColorPuzzle() {
+            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8'];
+            const left = document.getElementById('colorLeft');
+            const right = document.getElementById('colorRight');
+
+            left.innerHTML = '';
+            right.innerHTML = '';
+
+            colors.forEach((color, index) => {
+                const leftBox = document.createElement('div');
+                leftBox.style.cssText = `background: ${color}; height: 60px; border-radius: 0.5rem; cursor: pointer;`;
+                leftBox.dataset.index = index;
+                leftBox.onclick = () => selectColor(index);
+                left.appendChild(leftBox);
+
+                const rightBox = document.createElement('div');
+                rightBox.style.cssText = `background: ${color}; height: 60px; border-radius: 0.5rem; margin-left: auto;`;
+                rightBox.dataset.index = index;
+                right.appendChild(rightBox);
+            });
+        }
+
+        function selectColor(index) {
+            Utils.showNotification('Color matched!', 'success');
+            finishPuzzle(95, 'Color Expert!');
+        }
+
+        function showHint() {
+            Utils.showNotification('Keep trying! You\'re doing great! 💡', 'info');
+        }
+
+        function finishPuzzle(score, message) {
+            document.getElementById('puzzleContainer').style.display = 'none';
+            document.getElementById('resultsScreen').style.display = 'block';
+
+            document.getElementById('resultIcon').textContent = score >= 80 ? '🎉' : score >= 60 ? '👍' : '💪';
+            document.getElementById('resultMessage').textContent = message;
+            document.getElementById('puzzleScore').textContent = score;
+            document.getElementById('difficultyDisplay').textContent = currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1);
+
+            const elapsed = Math.floor((Date.now() - gameStartTime) / 1000);
+            document.getElementById('finalResult').textContent = elapsed + 's';
+
+            StorageManager.addQuizScore({
+                category: 'Puzzle - ' + currentPuzzle,
+                score: score,
+                total: 100,
+                percentage: score,
+                timeSpent: elapsed
+            });
+        }
+
+        function quitPuzzle() {
+            location.reload();
+        }
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!StorageManager.getUser()) {
+                window.location.href = 'login.html';
+            }
+            setDifficulty('medium');
+        });
+    </script>
+</body>
+</html>

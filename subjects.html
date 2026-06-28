@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subjects - Smart School Learning Portal</title>
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="theme-light">
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-section">
+                <div class="logo-icon">📚</div>
+                <h1>Smart Learning Portal</h1>
+            </a>
+            <div class="header-actions">
+                <button class="action-btn" title="Back">←</button>
+            </div>
+            <button class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <h1 class="mb-4">📖 Subjects</h1>
+
+        <!-- Filter Options -->
+        <div style="margin-bottom: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button class="btn btn-primary" onclick="filterSubjects('all')">All</button>
+            <button class="btn btn-outline" onclick="filterSubjects('favorites')">⭐ Favorites</button>
+            <button class="btn btn-outline" onclick="filterSubjects('recent')">⏰ Recently Viewed</button>
+        </div>
+
+        <!-- Subjects Grid -->
+        <div id="subjectsGrid" class="grid-auto">
+            <!-- Dynamically populated -->
+        </div>
+    </main>
+
+    <!-- Subject Detail Modal -->
+    <div id="subjectModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; overflow-y: auto;">
+        <div style="background: white; margin: 2rem auto; max-width: 600px; border-radius: 1rem; overflow: hidden; animation: slideInUp 0.3s ease;">
+            <div style="padding: 2rem; background: var(--primary-color); color: white; display: flex; justify-content: space-between; align-items: center;">
+                <h2 id="modalTitle">Subject</h2>
+                <button onclick="closeModal()" style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">✕</button>
+            </div>
+
+            <div style="padding: 2rem;">
+                <div id="modalContent">
+                    <!-- Dynamically populated -->
+                </div>
+
+                <div style="margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <button class="btn btn-primary" onclick="startLesson()">📝 Start Lesson</button>
+                    <button class="btn btn-primary" onclick="practiceQuiz()">🎮 Practice Quiz</button>
+                </div>
+
+                <div style="margin-top: 1rem; text-align: center;">
+                    <button id="favoriteBtn" class="btn btn-outline" onclick="toggleFavorite()" style="width: 100%;">⭐ Add to Favorites</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        const subjects = [
+            {
+                id: 1,
+                name: 'Mathematics',
+                icon: '📐',
+                color: '#FF6B6B',
+                description: 'Algebra, Geometry, Calculus, Statistics',
+                progress: 65,
+                lessons: 24,
+                quizzes: 8,
+                topics: ['Numbers', 'Geometry', 'Algebra', 'Trigonometry']
+            },
+            {
+                id: 2,
+                name: 'Science',
+                icon: '🔬',
+                color: '#4ECDC4',
+                description: 'Physics, Chemistry, Biology',
+                progress: 58,
+                lessons: 32,
+                quizzes: 10,
+                topics: ['Physics', 'Chemistry', 'Biology', 'Astronomy']
+            },
+            {
+                id: 3,
+                name: 'English',
+                icon: '📝',
+                color: '#45B7D1',
+                description: 'Literature, Grammar, Writing',
+                progress: 72,
+                lessons: 28,
+                quizzes: 9,
+                topics: ['Grammar', 'Literature', 'Writing', 'Reading']
+            },
+            {
+                id: 4,
+                name: 'History',
+                icon: '🏛️',
+                color: '#96CEB4',
+                description: 'World History, Ancient Civilizations',
+                progress: 45,
+                lessons: 20,
+                quizzes: 6,
+                topics: ['Ancient Egypt', 'Rome', 'Medieval Era', 'Modern History']
+            },
+            {
+                id: 5,
+                name: 'Geography',
+                icon: '🌍',
+                color: '#FFEAA7',
+                description: 'Countries, Capitals, Landmarks',
+                progress: 61,
+                lessons: 18,
+                quizzes: 7,
+                topics: ['Maps', 'Continents', 'Capitals', 'Landmarks']
+            },
+            {
+                id: 6,
+                name: 'Computer Science',
+                icon: '💻',
+                color: '#DDA15E',
+                description: 'Programming, Web Development',
+                progress: 78,
+                lessons: 26,
+                quizzes: 11,
+                topics: ['Python', 'JavaScript', 'Web Dev', 'Algorithms']
+            },
+            {
+                id: 7,
+                name: 'Hindi',
+                icon: '📖',
+                color: '#BC6C25',
+                description: 'Grammar, Literature, Writing (हिंदी)',
+                progress: 55,
+                lessons: 22,
+                quizzes: 8,
+                topics: ['Grammar', 'Literature', 'Writing', 'Poetry']
+            },
+            {
+                id: 8,
+                name: 'Tamil',
+                icon: '📚',
+                color: '#A23B72',
+                description: 'Grammar, Literature (தமிழ்)',
+                progress: 48,
+                lessons: 20,
+                quizzes: 7,
+                topics: ['Grammar', 'Literature', 'Poetry', 'Writing']
+            },
+            {
+                id: 9,
+                name: 'French',
+                icon: '🇫🇷',
+                color: '#F18F01',
+                description: 'Français - Grammar and Culture',
+                progress: 40,
+                lessons: 16,
+                quizzes: 5,
+                topics: ['Grammar', 'Vocabulary', 'Culture', 'Conversation']
+            },
+            {
+                id: 10,
+                name: 'Physical Education',
+                icon: '⚽',
+                color: '#2A9D8F',
+                description: 'Sports, Fitness, Health',
+                progress: 85,
+                lessons: 14,
+                quizzes: 4,
+                topics: ['Sports', 'Fitness', 'Nutrition', 'Health']
+            },
+            {
+                id: 11,
+                name: 'Art & Design',
+                icon: '🎨',
+                color: '#E76F51',
+                description: 'Drawing, Painting, Design',
+                progress: 70,
+                lessons: 15,
+                quizzes: 5,
+                topics: ['Drawing', 'Color Theory', 'Design', 'History of Art']
+            },
+            {
+                id: 12,
+                name: 'Music',
+                icon: '🎵',
+                color: '#F4A261',
+                description: 'Music Theory, Instruments',
+                progress: 52,
+                lessons: 12,
+                quizzes: 4,
+                topics: ['Theory', 'Instruments', 'Composition', 'History']
+            }
+        ];
+
+        let favorites = JSON.parse(localStorage.getItem('portal_favorites')) || [];
+        let currentSubject = null;
+        let currentFilter = 'all';
+
+        function renderSubjects(filter = 'all') {
+            const grid = document.getElementById('subjectsGrid');
+            grid.innerHTML = '';
+
+            let filtered = subjects;
+            if (filter === 'favorites') {
+                filtered = subjects.filter(s => favorites.includes(s.id));
+            }
+
+            filtered.forEach(subject => {
+                const card = document.createElement('div');
+                card.className = 'card hover-lift';
+                card.style.cursor = 'pointer';
+                card.style.position = 'relative';
+                card.onclick = () => openSubjectModal(subject);
+
+                const favoriteBtn = document.createElement('button');
+                favoriteBtn.style.cssText = 'position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; z-index: 10;';
+                favoriteBtn.textContent = favorites.includes(subject.id) ? '⭐' : '☆';
+                favoriteBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    toggleSubjectFavorite(subject.id);
+                    renderSubjects(currentFilter);
+                };
+
+                card.appendChild(favoriteBtn);
+
+                const content = document.createElement('div');
+                content.innerHTML = `
+                    <div style="text-align: center; margin-bottom: 1rem;">
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem;">${subject.icon}</div>
+                        <h3 style="color: ${subject.color}; margin: 0.5rem 0;">${subject.name}</h3>
+                        <p style="color: var(--text-secondary); margin: 0.5rem 0; font-size: 0.9rem;">${subject.description}</p>
+                    </div>
+
+                    <div style="margin: 1.5rem 0;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.9rem;">
+                            <span>Progress</span>
+                            <span style="font-weight: bold;">${subject.progress}%</span>
+                        </div>
+                        <div style="background: var(--bg-secondary); height: 0.5rem; border-radius: 0.25rem; overflow: hidden;">
+                            <div style="background: ${subject.color}; height: 100%; width: ${subject.progress}%; transition: width 0.3s ease;"></div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 1rem; text-align: center; font-size: 0.9rem;">
+                        <div style="background: var(--bg-secondary); padding: 0.5rem; border-radius: 0.5rem;">
+                            <div style="color: var(--text-secondary);">📝 Lessons</div>
+                            <div style="font-weight: bold;">${subject.lessons}</div>
+                        </div>
+                        <div style="background: var(--bg-secondary); padding: 0.5rem; border-radius: 0.5rem;">
+                            <div style="color: var(--text-secondary);">🎮 Quizzes</div>
+                            <div style="font-weight: bold;">${subject.quizzes}</div>
+                        </div>
+                    </div>
+                `;
+
+                card.appendChild(content);
+                grid.appendChild(card);
+            });
+        }
+
+        function openSubjectModal(subject) {
+            currentSubject = subject;
+            document.getElementById('modalTitle').textContent = subject.name;
+            document.getElementById('subjectModal').style.display = 'flex';
+            document.getElementById('subjectModal').style.alignItems = 'center';
+            document.getElementById('subjectModal').style.justifyContent = 'center';
+
+            const content = document.getElementById('modalContent');
+            content.innerHTML = `
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">${subject.icon}</div>
+                    <h2 style="color: ${subject.color}; margin: 0.5rem 0;">${subject.name}</h2>
+                    <p style="color: var(--text-secondary);">${subject.description}</p>
+                </div>
+
+                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-around; text-align: center;">
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: bold; color: ${subject.color};">${subject.progress}%</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">Progress</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: bold; color: ${subject.color};">${subject.lessons}</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">Lessons</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: bold; color: ${subject.color};">${subject.quizzes}</div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem;">Quizzes</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <h4 style="margin-bottom: 0.5rem;">📚 Topics:</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        ${subject.topics.map(topic => `<span style="background: var(--primary-color); color: white; padding: 0.3rem 0.8rem; border-radius: 1rem; font-size: 0.85rem;">${topic}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+
+            const favBtn = document.getElementById('favoriteBtn');
+            if (favorites.includes(subject.id)) {
+                favBtn.textContent = '⭐ Remove from Favorites';
+            } else {
+                favBtn.textContent = '⭐ Add to Favorites';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('subjectModal').style.display = 'none';
+            currentSubject = null;
+        }
+
+        function toggleSubjectFavorite(subjectId) {
+            if (favorites.includes(subjectId)) {
+                favorites = favorites.filter(id => id !== subjectId);
+            } else {
+                favorites.push(subjectId);
+            }
+            localStorage.setItem('portal_favorites', JSON.stringify(favorites));
+        }
+
+        function toggleFavorite() {
+            if (currentSubject) {
+                toggleSubjectFavorite(currentSubject.id);
+                openSubjectModal(currentSubject);
+                Utils.showNotification('Favorite updated!', 'success');
+            }
+        }
+
+        function filterSubjects(filter) {
+            currentFilter = filter;
+            renderSubjects(filter);
+
+            // Update button styles
+            document.querySelectorAll('[onclick^="filterSubjects"]').forEach(btn => {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-outline');
+            });
+            event.target.classList.remove('btn-outline');
+            event.target.classList.add('btn-primary');
+        }
+
+        function startLesson() {
+            if (currentSubject) {
+                Utils.showNotification(`Starting ${currentSubject.name} lesson...`, 'info');
+                closeModal();
+                setTimeout(() => {
+                    alert(`Welcome to ${currentSubject.name}!\n\nLesson 1: ${currentSubject.topics[0]}\n\nThis would be the lesson content.`);
+                }, 500);
+            }
+        }
+
+        function practiceQuiz() {
+            if (currentSubject) {
+                Utils.showNotification(`Starting ${currentSubject.name} quiz...`, 'info');
+                closeModal();
+                // Could redirect to quiz.html with category parameter
+                setTimeout(() => {
+                    window.location.href = 'quiz.html?subject=' + currentSubject.name;
+                }, 500);
+            }
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('subjectModal').addEventListener('click', (e) => {
+            if (e.target.id === 'subjectModal') {
+                closeModal();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!StorageManager.getUser()) {
+                window.location.href = 'login.html';
+                return;
+            }
+            renderSubjects();
+        });
+    </script>
+</body>
+</html>

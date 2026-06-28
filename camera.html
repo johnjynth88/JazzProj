@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera - Smart School Learning Portal</title>
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="theme-light">
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-section">
+                <div class="logo-icon">📚</div>
+                <h1>Smart Learning Portal</h1>
+            </a>
+            <div class="header-actions">
+                <button class="action-btn" title="Back">←</button>
+            </div>
+            <button class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-center" style="min-height: calc(100vh - 80px); flex-direction: column; gap: 2rem;">
+        <h1>📷 Camera</h1>
+
+        <!-- Camera View -->
+        <div class="card" style="width: 100%; max-width: 600px; padding: 0; overflow: hidden;">
+            <video id="cameraStream" autoplay playsinline style="width: 100%; display: block;"></video>
+            <canvas id="capturedImage" style="display: none;"></canvas>
+            
+            <div style="padding: 2rem; text-align: center; background: var(--card-bg);">
+                <!-- Camera Buttons -->
+                <div id="cameraControls" class="flex-center gap-2" style="gap: 1rem;">
+                    <button class="btn btn-primary" id="captureBtn">📸 Capture</button>
+                    <button class="btn btn-outline" id="switchCameraBtn">🔄 Switch</button>
+                    <button class="btn btn-outline" id="flashBtn">💡 Flash</button>
+                </div>
+
+                <!-- Preview and Action Buttons -->
+                <div id="previewControls" style="display: none; gap: 1rem;" class="flex-center">
+                    <button class="btn btn-secondary" id="retakeBtn">🔄 Retake</button>
+                    <button class="btn btn-success" id="saveBtn">💾 Save</button>
+                    <button class="btn btn-primary" id="shareBtn">📤 Share</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview -->
+        <div id="preview" style="display: none;">
+            <img id="previewImage" alt="Preview" style="max-width: 600px; width: 100%; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+        </div>
+
+        <!-- Camera Info -->
+        <div class="card" style="width: 100%; max-width: 600px; text-align: center;">
+            <h3>Camera Information</h3>
+            <p id="cameraInfo"></p>
+            <div class="grid-2" style="margin-top: 1rem;">
+                <div>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Mode</p>
+                    <p id="cameraMode" style="font-weight: 600;">Front Camera</p>
+                </div>
+                <div>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Photos Taken</p>
+                    <p id="photoCount" style="font-weight: 600;">0</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        const video = document.getElementById('cameraStream');
+        const canvas = document.getElementById('capturedImage');
+        const captureBtn = document.getElementById('captureBtn');
+        const switchCameraBtn = document.getElementById('switchCameraBtn');
+        const flashBtn = document.getElementById('flashBtn');
+        const retakeBtn = document.getElementById('retakeBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const shareBtn = document.getElementById('shareBtn');
+        const preview = document.getElementById('preview');
+        const previewImage = document.getElementById('previewImage');
+        const previewControls = document.getElementById('previewControls');
+        const cameraControls = document.getElementById('cameraControls');
+
+        let facingMode = 'user'; // front camera
+        let stream = null;
+        let photoCount = StorageManager.getGalleryImages().length;
+        let flashOn = false;
+        let currentCapture = null;
+
+        async function startCamera() {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({
+                    video: { 
+                        facingMode: facingMode,
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    },
+                    audio: false
+                });
+
+                video.srcObject = stream;
+                document.getElementById('cameraInfo').textContent = 'Camera ready';
+                updatePhotoCount();
+            } catch (error) {
+                console.error('Error accessing camera:', error);
+                Utils.showNotification('Unable to access camera. Please check permissions.', 'danger');
+                document.getElementById('cameraInfo').textContent = 'Camera access denied';
+            }
+        }
+
+        function stopCamera() {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+            }
+        }
+
+        captureBtn.addEventListener('click', () => {
+            const context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+
+            // Apply flash effect
+            if (flashOn) {
+                context.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                context.fillRect(0, 0, canvas.width, canvas.height);
+            }
+
+            // Draw the video frame to canvas
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            // Get the image data
+            currentCapture = canvas.toDataURL('image/jpeg');
+            previewImage.src = currentCapture;
+            
+            // Show preview
+            video.style.display = 'none';
+            preview.style.display = 'block';
+            cameraControls.style.display = 'none';
+            previewControls.style.display = 'flex';
+
+            Utils.showNotification('Photo captured!', 'success');
+        });
+
+        switchCameraBtn.addEventListener('click', () => {
+            facingMode = facingMode === 'user' ? 'environment' : 'user';
+            document.getElementById('cameraMode').textContent = facingMode === 'user' ? 'Front Camera' : 'Rear Camera';
+            
+            stopCamera();
+            startCamera();
+            Utils.showNotification(`Switched to ${facingMode === 'user' ? 'front' : 'rear'} camera`, 'info');
+        });
+
+        flashBtn.addEventListener('click', () => {
+            flashOn = !flashOn;
+            flashBtn.textContent = flashOn ? '💡 Flash ON' : '💡 Flash OFF';
+            flashBtn.classList.toggle('btn-success');
+            Utils.showNotification(flashOn ? 'Flash ON' : 'Flash OFF', 'info');
+        });
+
+        retakeBtn.addEventListener('click', () => {
+            video.style.display = 'block';
+            preview.style.display = 'none';
+            cameraControls.style.display = 'flex';
+            previewControls.style.display = 'none';
+            currentCapture = null;
+        });
+
+        saveBtn.addEventListener('click', () => {
+            if (currentCapture) {
+                const image = {
+                    name: `photo-${Date.now()}.jpg`,
+                    data: currentCapture,
+                    date: new Date().toISOString(),
+                    type: 'camera'
+                };
+                StorageManager.addGalleryImage(image);
+                updatePhotoCount();
+                
+                Utils.showNotification('Photo saved to gallery!', 'success');
+                
+                // Reset
+                setTimeout(() => {
+                    retakeBtn.click();
+                    currentCapture = null;
+                }, 500);
+            }
+        });
+
+        shareBtn.addEventListener('click', () => {
+            if (currentCapture) {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Check out my photo!',
+                        text: 'I captured this amazing photo with Smart School Portal',
+                        url: window.location.href
+                    }).catch(err => console.log('Share failed:', err));
+                } else {
+                    Utils.showNotification('Share not supported on this device', 'warning');
+                }
+            }
+        });
+
+        function updatePhotoCount() {
+            photoCount = StorageManager.getGalleryImages().length;
+            document.getElementById('photoCount').textContent = photoCount;
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === ' ') {
+                e.preventDefault();
+                captureBtn.click();
+            }
+            if (e.key === 'Escape') {
+                retakeBtn.click();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!StorageManager.getUser()) {
+                window.location.href = 'login.html';
+                return;
+            }
+            startCamera();
+            updatePhotoCount();
+        });
+
+        // Stop camera when page unloads
+        window.addEventListener('beforeunload', () => {
+            stopCamera();
+        });
+    </script>
+</body>
+</html>

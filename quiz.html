@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Smart School Learning Portal</title>
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/games.css">
+</head>
+<body class="theme-light">
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-section">
+                <div class="logo-icon">📚</div>
+                <h1>Smart Learning Portal</h1>
+            </a>
+            <div class="header-actions">
+                <button class="action-btn" title="Back">←</button>
+            </div>
+            <button class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="game-container">
+        <!-- Quiz Selection Screen -->
+        <div id="quizSelection" class="text-center" style="width: 100%; max-width: 1000px;">
+            <h1 class="mb-4">📝 Quiz Categories</h1>
+            <div class="grid-auto">
+                <div class="game-card hover-lift">
+                    <div class="game-card-image">📐</div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Mathematics</h3>
+                        <p class="game-card-description">Test your math skills</p>
+                        <button class="btn btn-primary" onclick="startQuiz('math')" style="width: 100%; margin-top: 1rem;">Start Quiz</button>
+                    </div>
+                </div>
+
+                <div class="game-card hover-lift">
+                    <div class="game-card-image">🔬</div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Science</h3>
+                        <p class="game-card-description">Explore science topics</p>
+                        <button class="btn btn-primary" onclick="startQuiz('science')" style="width: 100%; margin-top: 1rem;">Start Quiz</button>
+                    </div>
+                </div>
+
+                <div class="game-card hover-lift">
+                    <div class="game-card-image">🌍</div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">General Knowledge</h3>
+                        <p class="game-card-description">Boost your knowledge</p>
+                        <button class="btn btn-primary" onclick="startQuiz('gk')" style="width: 100%; margin-top: 1rem;">Start Quiz</button>
+                    </div>
+                </div>
+
+                <div class="game-card hover-lift">
+                    <div class="game-card-image">🎨</div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">Creative</h3>
+                        <p class="game-card-description">Express yourself</p>
+                        <button class="btn btn-primary" onclick="startQuiz('creative')" style="width: 100%; margin-top: 1rem;">Start Quiz</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Container -->
+        <div id="quizContainer" style="display: none; width: 100%; max-width: 700px;">
+            <div class="quiz-header">
+                <div class="quiz-progress">
+                    <div class="question-counter">
+                        <span id="questionCount">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">10</span></span>
+                        <span id="timeLeft"></span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-container animate-fade-in">
+                <div class="quiz-timer" id="quizTimer">
+                    <div class="timer-circle" id="timerCircle">60</div>
+                    <span>Time Left</span>
+                </div>
+
+                <div class="question" id="questionText"></div>
+                <img id="questionImage" class="question-image" alt="" style="display: none;">
+
+                <div class="options" id="optionsContainer"></div>
+
+                <div class="flex-between">
+                    <button class="btn btn-outline" id="prevBtn" onclick="previousQuestion()">← Previous</button>
+                    <button class="btn btn-outline" id="skipBtn" onclick="skipQuestion()">Skip</button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" style="display: none;">
+            <div class="result-screen">
+                <div class="result-icon" id="resultIcon">🎉</div>
+                <div class="result-message" id="resultMessage">Great Job!</div>
+
+                <div class="score-display">
+                    <div class="score-item">
+                        <div class="score-label">Score</div>
+                        <div class="score-value" id="finalScore">75%</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">Correct</div>
+                        <div class="score-value" id="correctCount">7/10</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">Time</div>
+                        <div class="score-value" id="timeSpent">2:30</div>
+                    </div>
+                </div>
+
+                <div class="result-buttons">
+                    <button class="btn btn-outline" onclick="location.reload()">Try Again</button>
+                    <button class="btn btn-primary" onclick="goHome()">Home</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        // Quiz Data
+        const quizData = {
+            math: [
+                {
+                    question: "What is 15 + 7?",
+                    options: ["20", "22", "25", "30"],
+                    correct: 1
+                },
+                {
+                    question: "What is 12 × 5?",
+                    options: ["50", "60", "65", "70"],
+                    correct: 1
+                }
+            ],
+            science: [
+                {
+                    question: "What is the chemical symbol for Gold?",
+                    options: ["Go", "Au", "Gd", "Ag"],
+                    correct: 1
+                },
+                {
+                    question: "How many planets are in our solar system?",
+                    options: ["7", "8", "9", "10"],
+                    correct: 1
+                }
+            ],
+            gk: [
+                {
+                    question: "What is the capital of India?",
+                    options: ["Mumbai", "New Delhi", "Bangalore", "Chennai"],
+                    correct: 1
+                },
+                {
+                    question: "Who is the author of Harry Potter?",
+                    options: ["J.K. Rowling", "George R.R. Martin", "Stephen King", "Suzanne Collins"],
+                    correct: 0
+                }
+            ],
+            creative: [
+                {
+                    question: "Which color is a primary color?",
+                    options: ["Green", "Purple", "Blue", "Brown"],
+                    correct: 2
+                },
+                {
+                    question: "What art form uses sound as its medium?",
+                    options: ["Painting", "Music", "Sculpture", "Photography"],
+                    correct: 1
+                }
+            ]
+        };
+
+        let currentQuiz = null;
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answers = [];
+        let timeSpent = 0;
+        let timeLimit = 60;
+        let timerInterval = null;
+
+        function startQuiz(category) {
+            currentQuiz = quizData[category] || quizData.gk;
+            currentQuestionIndex = 0;
+            score = 0;
+            answers = new Array(currentQuiz.length).fill(null);
+            timeSpent = 0;
+
+            document.getElementById('quizSelection').style.display = 'none';
+            document.getElementById('quizContainer').style.display = 'block';
+            document.getElementById('totalQuestions').textContent = currentQuiz.length;
+
+            loadQuestion();
+            startTimer();
+        }
+
+        function loadQuestion() {
+            const question = currentQuiz[currentQuestionIndex];
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('questionText').textContent = question.question;
+
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+
+            question.options.forEach((option, index) => {
+                const optionEl = document.createElement('button');
+                optionEl.className = 'option';
+                optionEl.textContent = option;
+                optionEl.onclick = () => selectOption(index);
+                
+                if (answers[currentQuestionIndex] === index) {
+                    optionEl.classList.add('selected');
+                }
+
+                container.appendChild(optionEl);
+            });
+
+            // Update progress
+            const progress = ((currentQuestionIndex + 1) / currentQuiz.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+
+            // Update buttons
+            document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
+            document.getElementById('nextBtn').textContent = currentQuestionIndex === currentQuiz.length - 1 ? 'Finish' : 'Next →';
+        }
+
+        function selectOption(index) {
+            answers[currentQuestionIndex] = index;
+            const question = currentQuiz[currentQuestionIndex];
+            
+            document.querySelectorAll('.option').forEach((opt, i) => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                if (i === index) {
+                    opt.classList.add('selected');
+                    if (i === question.correct) {
+                        opt.classList.add('correct');
+                        score++;
+                    }
+                }
+            });
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < currentQuiz.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        }
+
+        function skipQuestion() {
+            answers[currentQuestionIndex] = -1; // Mark as skipped
+            nextQuestion();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeSpent++;
+                const remaining = timeLimit - (timeSpent % timeLimit);
+                document.getElementById('timerCircle').textContent = remaining;
+                
+                if (remaining <= 10) {
+                    document.getElementById('quizTimer').style.background = 'rgba(239, 68, 68, 0.1)';
+                }
+            }, 1000);
+        }
+
+        function finishQuiz() {
+            clearInterval(timerInterval);
+            
+            const percentage = (score / currentQuiz.length) * 100;
+            const minutes = Math.floor(timeSpent / 60);
+            const seconds = timeSpent % 60;
+
+            // Save score
+            StorageManager.addQuizScore({
+                category: 'General',
+                score: score,
+                total: currentQuiz.length,
+                percentage: percentage,
+                timeSpent: timeSpent
+            });
+
+            // Show results
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('resultsScreen').style.display = 'block';
+
+            document.getElementById('finalScore').textContent = Math.round(percentage) + '%';
+            document.getElementById('correctCount').textContent = score + '/' + currentQuiz.length;
+            document.getElementById('timeSpent').textContent = `${minutes}:${String(seconds).padStart(2, '0')}`;
+
+            if (percentage >= 80) {
+                document.getElementById('resultIcon').textContent = '🎉';
+                document.getElementById('resultMessage').textContent = 'Excellent!';
+                StorageManager.addAchievement({
+                    title: 'Quiz Master',
+                    description: 'Scored 80% or more on a quiz'
+                });
+            } else if (percentage >= 60) {
+                document.getElementById('resultIcon').textContent = '👍';
+                document.getElementById('resultMessage').textContent = 'Good Job!';
+            } else {
+                document.getElementById('resultIcon').textContent = '💪';
+                document.getElementById('resultMessage').textContent = 'Keep Practicing!';
+            }
+        }
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!StorageManager.getUser()) {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>

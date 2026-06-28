@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapid Fire - Smart School Learning Portal</title>
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/games.css">
+</head>
+<body class="theme-light">
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-section">
+                <div class="logo-icon">📚</div>
+                <h1>Smart Learning Portal</h1>
+            </a>
+            <div class="header-actions">
+                <button class="action-btn" title="Back">←</button>
+            </div>
+            <button class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="game-container">
+        <!-- Mode Selection -->
+        <div id="modeSelection" class="text-center" style="width: 100%; max-width: 900px;">
+            <h1 class="mb-4">⚡ Rapid Fire</h1>
+            <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem;">Answer as many questions as you can before time runs out!</p>
+
+            <div class="grid-auto">
+                <div class="game-card hover-lift">
+                    <div class="game-card-image">⏱️</div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">30 Second Rush</h3>
+                        <p class="game-card-description">Quick & intense</p>
+                        <button class="btn btn-primary" onclick="startRapidFire(30)" style="width: 100%; margin-top: 1rem;">Play</button>
+                    </div>
+                </div>
+
+                <div class="game-card hover-lift">
+                    <div class="game-card-image">⏲️</div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">60 Second Challenge</h3>
+                        <p class="game-card-description">Standard mode</p>
+                        <button class="btn btn-primary" onclick="startRapidFire(60)" style="width: 100%; margin-top: 1rem;">Play</button>
+                    </div>
+                </div>
+
+                <div class="game-card hover-lift">
+                    <div class="game-card-image">🚀</div>
+                    <div class="game-card-content">
+                        <h3 class="game-card-title">120 Second Marathon</h3>
+                        <p class="game-card-description">Extended challenge</p>
+                        <button class="btn btn-primary" onclick="startRapidFire(120)" style="width: 100%; margin-top: 1rem;">Play</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Container -->
+        <div id="gameContainer" style="display: none; width: 100%; max-width: 700px;">
+            <div class="quiz-header">
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="text-align: center; padding: 0.5rem; background: var(--bg-secondary); border-radius: 0.5rem;">
+                        <div style="font-size: 0.9rem; color: var(--text-secondary);">Lives</div>
+                        <div id="livesDisplay" style="font-size: 1.8rem; font-weight: bold; color: #EF4444;">❤️ 3</div>
+                    </div>
+                    <div style="text-align: center; padding: 0.5rem; background: var(--bg-secondary); border-radius: 0.5rem;">
+                        <div style="font-size: 0.9rem; color: var(--text-secondary);">Combo</div>
+                        <div id="comboDisplay" style="font-size: 1.8rem; font-weight: bold; color: #FFA500;">🔥 0</div>
+                    </div>
+                    <div style="text-align: center; padding: 0.5rem; background: var(--bg-secondary); border-radius: 0.5rem;">
+                        <div style="font-size: 0.9rem; color: var(--text-secondary);">Score</div>
+                        <div id="scoreDisplay" style="font-size: 1.8rem; font-weight: bold; color: #10B981;">0</div>
+                    </div>
+                </div>
+
+                <div class="quiz-progress">
+                    <div class="question-counter">
+                        <span id="questionCount">Question <span id="currentQuestion">1</span></span>
+                        <span id="timeLeft"></span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-container animate-fade-in">
+                <div class="quiz-timer" id="quizTimer">
+                    <div class="timer-circle" id="timerCircle" style="font-size: 3rem; font-weight: bold;">60</div>
+                    <span>Time Left</span>
+                </div>
+
+                <div class="question" id="questionText"></div>
+
+                <div class="options" id="optionsContainer"></div>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="gameOverScreen" style="display: none;">
+            <div class="result-screen">
+                <div class="result-icon" id="gameOverIcon">🏁</div>
+                <div class="result-message">Game Over!</div>
+
+                <div class="score-display">
+                    <div class="score-item">
+                        <div class="score-label">Final Score</div>
+                        <div class="score-value" id="finalScore">0</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">Questions</div>
+                        <div class="score-value" id="questionsAnswered">0</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">Accuracy</div>
+                        <div class="score-value" id="accuracy">0%</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; text-align: center;">
+                    <p style="font-size: 1.5rem; margin-bottom: 1rem;">
+                        <span id="starRating"></span>
+                    </p>
+                    <p id="gameMessage" style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 1rem;"></p>
+                </div>
+
+                <div class="result-buttons">
+                    <button class="btn btn-outline" onclick="location.reload()">Try Again</button>
+                    <button class="btn btn-primary" onclick="goHome()">Home</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        // Rapid Fire Questions
+        const rapidFireQuestions = [
+            { question: "What is 2 + 2?", options: ["3", "4", "5", "6"], correct: 1 },
+            { question: "What is 5 × 3?", options: ["10", "12", "15", "18"], correct: 2 },
+            { question: "What is the capital of India?", options: ["Mumbai", "New Delhi", "Bangalore", "Chennai"], correct: 1 },
+            { question: "What is 10 - 3?", options: ["5", "6", "7", "8"], correct: 2 },
+            { question: "What is 8 ÷ 2?", options: ["3", "4", "5", "6"], correct: 1 },
+            { question: "What is 7 + 8?", options: ["14", "15", "16", "17"], correct: 2 },
+            { question: "What is the smallest prime number?", options: ["0", "1", "2", "3"], correct: 2 },
+            { question: "What is 12 × 2?", options: ["20", "22", "24", "26"], correct: 2 },
+            { question: "What is 100 ÷ 5?", options: ["15", "20", "25", "30"], correct: 1 },
+            { question: "What is 9 + 6?", options: ["14", "15", "16", "17"], correct: 1 },
+            { question: "What color is the sky?", options: ["Green", "Red", "Blue", "Yellow"], correct: 2 },
+            { question: "How many legs does a spider have?", options: ["4", "6", "8", "10"], correct: 2 },
+            { question: "What is 15 - 7?", options: ["6", "7", "8", "9"], correct: 2 },
+            { question: "What is 3 × 4?", options: ["10", "11", "12", "13"], correct: 2 },
+            { question: "What is 25 + 25?", options: ["40", "45", "50", "55"], correct: 2 }
+        ];
+
+        let timeLimit = 60;
+        let lives = 3;
+        let score = 0;
+        let combo = 0;
+        let maxCombo = 0;
+        let questionsAnswered = 0;
+        let correctAnswers = 0;
+        let currentQuestionIndex = 0;
+        let timerInterval = null;
+        let gameActive = true;
+
+        function startRapidFire(seconds) {
+            timeLimit = seconds;
+            lives = 3;
+            score = 0;
+            combo = 0;
+            maxCombo = 0;
+            questionsAnswered = 0;
+            correctAnswers = 0;
+            currentQuestionIndex = 0;
+            gameActive = true;
+
+            document.getElementById('modeSelection').style.display = 'none';
+            document.getElementById('gameContainer').style.display = 'block';
+            document.getElementById('gameOverScreen').style.display = 'none';
+
+            loadQuestion();
+            startTimer();
+        }
+
+        function loadQuestion() {
+            if (!gameActive) return;
+
+            const question = rapidFireQuestions[currentQuestionIndex % rapidFireQuestions.length];
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('currentQuestion').textContent = questionsAnswered + 1;
+
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+
+            question.options.forEach((option, index) => {
+                const optionEl = document.createElement('button');
+                optionEl.className = 'option';
+                optionEl.textContent = option;
+                optionEl.onclick = () => selectOption(index, question.correct);
+                container.appendChild(optionEl);
+            });
+
+            currentQuestionIndex++;
+        }
+
+        function selectOption(selected, correct) {
+            if (!gameActive) return;
+
+            questionsAnswered++;
+
+            if (selected === correct) {
+                correctAnswers++;
+                combo++;
+                maxCombo = Math.max(maxCombo, combo);
+                score += 10 + (combo * 2); // Bonus points for combo
+                document.querySelector('.option:nth-child(' + (selected + 1) + ')').classList.add('correct');
+            } else {
+                lives--;
+                combo = 0;
+                document.querySelector('.option:nth-child(' + (selected + 1) + ')').classList.add('incorrect');
+                document.querySelector('.option:nth-child(' + (correct + 1) + ')').classList.add('correct');
+
+                if (lives <= 0) {
+                    endGame();
+                    return;
+                }
+            }
+
+            updateDisplay();
+
+            setTimeout(() => {
+                loadQuestion();
+            }, 800);
+        }
+
+        function updateDisplay() {
+            document.getElementById('livesDisplay').textContent = '❤️ ' + lives;
+            document.getElementById('comboDisplay').textContent = '🔥 ' + combo;
+            document.getElementById('scoreDisplay').textContent = score;
+        }
+
+        function startTimer() {
+            let timeRemaining = timeLimit;
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                document.getElementById('timerCircle').textContent = timeRemaining;
+
+                if (timeRemaining <= 10) {
+                    document.getElementById('quizTimer').style.background = 'rgba(239, 68, 68, 0.1)';
+                }
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    endGame();
+                }
+            }, 1000);
+        }
+
+        function endGame() {
+            gameActive = false;
+            clearInterval(timerInterval);
+
+            document.getElementById('gameContainer').style.display = 'none';
+            document.getElementById('gameOverScreen').style.display = 'block';
+
+            const accuracy = questionsAnswered > 0 ? Math.round((correctAnswers / questionsAnswered) * 100) : 0;
+            const stars = accuracy >= 90 ? '⭐⭐⭐' : accuracy >= 70 ? '⭐⭐' : '⭐';
+
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('questionsAnswered').textContent = questionsAnswered;
+            document.getElementById('accuracy').textContent = accuracy + '%';
+            document.getElementById('starRating').textContent = stars;
+
+            if (accuracy >= 90) {
+                document.getElementById('gameOverIcon').textContent = '🏆';
+                document.getElementById('gameMessage').textContent = 'Outstanding! You\'re a rapid fire master!';
+            } else if (accuracy >= 70) {
+                document.getElementById('gameOverIcon').textContent = '🎉';
+                document.getElementById('gameMessage').textContent = 'Great job! Keep practicing!';
+            } else {
+                document.getElementById('gameOverIcon').textContent = '💪';
+                document.getElementById('gameMessage').textContent = 'Good effort! Try again to improve!';
+            }
+
+            StorageManager.addQuizScore({
+                category: 'Rapid Fire',
+                score: score,
+                total: questionsAnswered,
+                percentage: accuracy,
+                timeSpent: timeLimit
+            });
+
+            if (accuracy >= 80) {
+                StorageManager.addAchievement({
+                    title: 'Speed Demon',
+                    description: 'Scored 80% or more in Rapid Fire mode'
+                });
+            }
+        }
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!StorageManager.getUser()) {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>

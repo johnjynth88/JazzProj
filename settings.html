@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Smart School Learning Portal</title>
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="theme-light">
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo-section">
+                <div class="logo-icon">📚</div>
+                <h1>Smart Learning Portal</h1>
+            </a>
+            <div class="header-actions">
+                <button class="action-btn" title="Back">←</button>
+            </div>
+            <button class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <h1 class="mb-4">⚙️ Settings</h1>
+
+        <!-- Settings Categories -->
+        <div class="grid-2">
+            <!-- Theme Settings -->
+            <div class="card mb-4">
+                <h2 class="card-title">🎨 Theme</h2>
+                <div class="form-group">
+                    <label for="themeSelect">Select Theme</label>
+                    <select id="themeSelect" class="selector" style="width: 100%;">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="school">School Blue</option>
+                        <option value="nature">Nature Green</option>
+                        <option value="space">Space Blue</option>
+                        <option value="cartoon">Cartoon</option>
+                        <option value="rainbow">Rainbow</option>
+                    </select>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">Choose your favorite theme for a personalized experience</p>
+            </div>
+
+            <!-- Language Settings -->
+            <div class="card mb-4">
+                <h2 class="card-title">🌐 Language</h2>
+                <div class="form-group">
+                    <label for="languageSelect">Select Language</label>
+                    <select id="languageSelect" class="selector" style="width: 100%;">
+                        <option value="english">English</option>
+                        <option value="tamil">Tamil தமிழ்</option>
+                        <option value="french">Français</option>
+                        <option value="hindi">हिंदी</option>
+                    </select>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">Choose your preferred language</p>
+            </div>
+
+            <!-- Animation Settings -->
+            <div class="card mb-4">
+                <h2 class="card-title">✨ Animations</h2>
+                <label class="checkbox-item">
+                    <input type="checkbox" id="animationsToggle" checked>
+                    <span>Enable Animations</span>
+                </label>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">Smooth transitions and animations</p>
+            </div>
+
+            <!-- Sound Settings -->
+            <div class="card mb-4">
+                <h2 class="card-title">🔊 Sound</h2>
+                <label class="checkbox-item">
+                    <input type="checkbox" id="soundToggle" checked>
+                    <span>Enable Sound Effects</span>
+                </label>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">Game sounds and notifications</p>
+            </div>
+
+            <!-- Font Size -->
+            <div class="card mb-4">
+                <h2 class="card-title">🔤 Font Size</h2>
+                <div class="form-group">
+                    <label>Text Size</label>
+                    <input type="range" id="fontSizeSlider" min="12" max="20" value="16" style="width: 100%; margin-top: 0.5rem;">
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Current size: <span id="fontSizeValue">16</span>px</p>
+                </div>
+            </div>
+
+            <!-- Notifications -->
+            <div class="card mb-4">
+                <h2 class="card-title">🔔 Notifications</h2>
+                <label class="checkbox-item">
+                    <input type="checkbox" id="notificationToggle" checked>
+                    <span>Enable Notifications</span>
+                </label>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">Reminders and game alerts</p>
+            </div>
+        </div>
+
+        <!-- Data Management -->
+        <div class="card mb-4">
+            <h2 class="card-title">💾 Data & Backup</h2>
+            <div class="grid-2" style="gap: 1rem; margin-top: 1rem;">
+                <button class="btn btn-primary" id="backupBtn">📥 Backup Data</button>
+                <button class="btn btn-outline" id="restoreBtn">📤 Restore Data</button>
+                <button class="btn btn-outline" id="resetBtn">🔄 Reset All</button>
+                <button class="btn btn-primary" id="statsBtn">📊 View Statistics</button>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">Backup your progress or restore from a previous backup</p>
+            <input type="file" id="restoreFile" style="display: none;" accept=".json">
+        </div>
+
+        <!-- About & Help -->
+        <div class="grid-2">
+            <div class="card">
+                <h2 class="card-title">ℹ️ About</h2>
+                <p>Smart School Learning Portal v1.0</p>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">A comprehensive learning management system for students</p>
+                <div style="margin-top: 1rem;">
+                    <p style="color: var(--text-secondary); font-size: 0.85rem;">© 2024 Smart School. All rights reserved.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-title">📚 Help & Support</h2>
+                <button class="btn btn-outline" onclick="openHelp()" style="width: 100%; margin-bottom: 0.5rem;">❓ FAQ</button>
+                <button class="btn btn-outline" onclick="sendFeedback()" style="width: 100%; margin-bottom: 0.5rem;">💬 Feedback</button>
+                <button class="btn btn-outline" onclick="reportBug()" style="width: 100%;">🐛 Report Bug</button>
+            </div>
+        </div>
+
+        <!-- Logout -->
+        <div class="card text-center mt-4">
+            <button class="btn btn-danger" id="logoutBtn" style="width: 100%; max-width: 300px;">🚪 Logout</button>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        // Load current settings
+        function loadSettings() {
+            const theme = StorageManager.getTheme();
+            const language = StorageManager.getLanguage();
+            const settings = StorageManager.getSettings();
+
+            document.getElementById('themeSelect').value = theme;
+            document.getElementById('languageSelect').value = language;
+            document.getElementById('animationsToggle').checked = settings.animationsEnabled !== false;
+            document.getElementById('soundToggle').checked = settings.soundEnabled !== false;
+            document.getElementById('notificationToggle').checked = settings.notificationsEnabled !== false;
+            document.getElementById('fontSizeSlider').value = settings.fontSize || 16;
+            document.getElementById('fontSizeValue').textContent = settings.fontSize || 16;
+        }
+
+        // Theme change
+        document.getElementById('themeSelect').addEventListener('change', (e) => {
+            if (window.portal) {
+                window.portal.applyTheme(e.target.value);
+            }
+        });
+
+        // Language change
+        document.getElementById('languageSelect').addEventListener('change', (e) => {
+            if (window.portal) {
+                window.portal.applyLanguage(e.target.value);
+            }
+        });
+
+        // Font size change
+        document.getElementById('fontSizeSlider').addEventListener('input', (e) => {
+            const size = e.target.value;
+            document.getElementById('fontSizeValue').textContent = size;
+            document.documentElement.style.fontSize = size + 'px';
+            
+            let settings = StorageManager.getSettings();
+            settings.fontSize = size;
+            StorageManager.setSettings(settings);
+        });
+
+        // Animations toggle
+        document.getElementById('animationsToggle').addEventListener('change', (e) => {
+            let settings = StorageManager.getSettings();
+            settings.animationsEnabled = e.target.checked;
+            StorageManager.setSettings(settings);
+            
+            if (!e.target.checked) {
+                document.body.classList.add('animations-disabled');
+            } else {
+                document.body.classList.remove('animations-disabled');
+            }
+        });
+
+        // Sound toggle
+        document.getElementById('soundToggle').addEventListener('change', (e) => {
+            let settings = StorageManager.getSettings();
+            settings.soundEnabled = e.target.checked;
+            StorageManager.setSettings(settings);
+        });
+
+        // Notification toggle
+        document.getElementById('notificationToggle').addEventListener('change', (e) => {
+            let settings = StorageManager.getSettings();
+            settings.notificationsEnabled = e.target.checked;
+            StorageManager.setSettings(settings);
+        });
+
+        // Backup
+        document.getElementById('backupBtn').addEventListener('click', () => {
+            StorageManager.exportData();
+            Utils.showNotification('Backup downloaded!', 'success');
+        });
+
+        // Restore
+        document.getElementById('restoreBtn').addEventListener('click', () => {
+            document.getElementById('restoreFile').click();
+        });
+
+        document.getElementById('restoreFile').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                StorageManager.importData(file).then(() => {
+                    Utils.showNotification('Data restored successfully!', 'success');
+                    setTimeout(() => location.reload(), 1000);
+                }).catch(err => {
+                    Utils.showNotification('Error restoring data', 'danger');
+                });
+            }
+        });
+
+        // Reset All
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            if (confirm('Are you sure? This will delete all your data!')) {
+                if (confirm('This action cannot be undone!')) {
+                    StorageManager.clearAll();
+                    Utils.showNotification('All data cleared!', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 1000);
+                }
+            }
+        });
+
+        // Statistics
+        document.getElementById('statsBtn').addEventListener('click', () => {
+            const user = StorageManager.getUser();
+            const scores = StorageManager.getQuizScores();
+            const achievements = StorageManager.getAchievements();
+            const reminders = StorageManager.getReminders();
+            const gallery = StorageManager.getGalleryImages();
+
+            const statsMessage = `
+📊 Your Statistics:
+
+👤 Account: ${user?.email || 'Unknown'}
+📝 Quizzes Completed: ${scores.length}
+🏆 Achievements: ${achievements.length}
+⏰ Reminders: ${reminders.length}
+🖼️ Gallery Photos: ${gallery.length}
+⭐ Average Score: ${scores.length > 0 ? Math.round(scores.reduce((a, b) => a + b.percentage, 0) / scores.length) : 0}%
+            `;
+
+            alert(statsMessage);
+        });
+
+        // Help
+        function openHelp() {
+            alert('Help & FAQ\n\n1. How do I take photos?\nGo to Camera and click Capture\n\n2. How do I add reminders?\nClick Reminder and Add new reminder\n\n3. How do I reset my password?\nContact support via Feedback');
+        }
+
+        function sendFeedback() {
+            const feedback = prompt('Send us your feedback:');
+            if (feedback) {
+                Utils.showNotification('Thank you for your feedback!', 'success');
+            }
+        }
+
+        function reportBug() {
+            const bug = prompt('Describe the bug:');
+            if (bug) {
+                Utils.showNotification('Bug report sent! Thank you!', 'success');
+            }
+        }
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            if (confirm('Are you sure you want to logout?')) {
+                StorageManager.removeUser();
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!StorageManager.getUser()) {
+                window.location.href = 'login.html';
+                return;
+            }
+            loadSettings();
+        });
+    </script>
+</body>
+</html>
