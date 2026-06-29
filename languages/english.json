@@ -262,7 +262,12 @@
     "edit": "Edit",
     "share": "Share",
     "more": "More",
-    "less": "Less"
+    "less": "Less",
+    "start": "Start",
+    "open": "Open",
+    "manage": "Manage",
+    "explore": "Explore",
+    "configure": "Configure"
   },
   "welcome": {
     "mainTitle": "Welcome to Smart Learning Portal",

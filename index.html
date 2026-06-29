@@ -248,27 +248,14 @@
     <script>
         // Initialize page with quote
         document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('[data-i18n="home.quote"]').textContent = Utils.getRandomQuote();
-
-            // Language selector
-            document.getElementById('languageSelect').addEventListener('change', (e) => {
-                if (window.portal) {
-                    window.portal.applyLanguage(e.target.value);
-                }
-            });
-
-            // Theme selector
-            document.getElementById('themeSelect').addEventListener('change', (e) => {
-                if (window.portal) {
-                    window.portal.applyTheme(e.target.value);
-                }
-            });
-
-            // Set current language and theme
-            if (window.portal) {
-                document.getElementById('languageSelect').value = window.portal.currentLanguage;
-                document.getElementById('themeSelect').value = window.portal.currentTheme;
+            // Set page quote
+            const quoteEl = document.querySelector('[data-i18n="home.quote"]');
+            if (quoteEl) {
+                quoteEl.textContent = Utils.getRandomQuote();
             }
+
+            // NOTE: Language and Theme selectors are already handled by app.js
+            // DO NOT duplicate event listeners here
 
             // Check if user is logged in
             const user = StorageManager.getUser();

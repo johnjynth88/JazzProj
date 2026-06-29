@@ -262,7 +262,12 @@
     "edit": "Modifier",
     "share": "Partager",
     "more": "Plus",
-    "less": "Moins"
+    "less": "Moins",
+    "start": "Commencer",
+    "open": "Ouvrir",
+    "manage": "Gérer",
+    "explore": "Explorer",
+    "configure": "Configurer"
   },
   "welcome": {
     "mainTitle": "Bienvenue dans le Portail d'apprentissage intelligent",

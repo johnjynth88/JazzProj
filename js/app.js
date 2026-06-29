@@ -16,13 +16,19 @@ class SmartSchoolPortal {
     
     // Load saved preferences
     this.loadPreferences();
+    console.log('Current language preference:', this.currentLanguage);
     
-    // Load language translations
+    // Load language translations FIRST - this is critical
+    console.log('Loading language files...');
     await this.loadLanguages();
     
-    // Apply saved theme and language
+    // Apply theme and language AFTER translations are loaded
     this.applyTheme(this.currentTheme);
+    console.log('Theme applied:', this.currentTheme);
+    
+    // Apply language - this will now use loaded translations
     this.applyLanguage(this.currentLanguage);
+    console.log('Language applied:', this.currentLanguage);
     
     // Check if user is logged in
     this.checkUserSession();
@@ -52,18 +58,160 @@ class SmartSchoolPortal {
   async loadLanguages() {
     try {
       const languages = ['english', 'tamil', 'french', 'hindi'];
+      const loadedLanguages = [];
+      
+      // Get the base URL - handle both file:// and http:// protocols
+      const baseURL = new URL('.', window.location.href).href;
+      console.log('Base URL for language files:', baseURL);
       
       for (const lang of languages) {
-        const response = await fetch(`languages/${lang}.json`);
-        if (response.ok) {
-          this.translations[lang] = await response.json();
+        try {
+          // Construct absolute path for language file
+          const langFilePath = new URL(`languages/${lang}.json`, baseURL).href;
+          console.log(`Loading ${lang} from: ${langFilePath}`);
+          
+          const response = await fetch(langFilePath);
+          if (response.ok) {
+            this.translations[lang] = await response.json();
+            loadedLanguages.push(lang);
+            console.log(`✓ Loaded ${lang} translations successfully`);
+          } else {
+            console.warn(`Failed to load ${lang}: HTTP ${response.status}`);
+          }
+        } catch (error) {
+          console.error(`Error loading ${lang}:`, error);
         }
       }
       
-      console.log('✓ Languages loaded:', Object.keys(this.translations));
+      console.log('✓ Languages loaded:', loadedLanguages);
+      console.log('Translation object keys:', Object.keys(this.translations));
+      
+      if (loadedLanguages.length === 0) {
+        console.error('⚠️ No languages loaded! Check Network tab for failed requests.');
+        this.loadFallbackTranslations();
+      }
     } catch (error) {
-      console.error('Error loading languages:', error);
+      console.error('Error in loadLanguages:', error);
+      this.loadFallbackTranslations();
     }
+  }
+
+  loadFallbackTranslations() {
+    console.warn('Loading fallback translations...');
+    this.translations = {
+      english: {
+        header: {
+          schoolName: "Smart Learning Portal",
+          search: "Search...",
+          language: "Language",
+          country: "Country",
+          theme: "Theme",
+          options: {
+            english: "English",
+            tamil: "Tamil",
+            french: "Français",
+            hindi: "हिंदी",
+            india: "India",
+            usa: "USA",
+            uk: "UK",
+            light: "Light",
+            dark: "Dark",
+            school: "School",
+            nature: "Nature",
+            space: "Space",
+            cartoon: "Cartoon",
+            rainbow: "Rainbow"
+          }
+        },
+        home: {
+          welcome: "Welcome",
+          greeting: "Good Morning!",
+          whatCanIDo: "What can I do for you?"
+        },
+        cards: {
+          quiz: "Quiz",
+          puzzle: "Puzzle",
+          rapidFire: "Rapid Fire",
+          camera: "Camera",
+          gallery: "Gallery",
+          reminder: "Reminder",
+          subjects: "Subjects",
+          settings: "Settings",
+          achievements: "Achievements"
+        },
+        common: {
+          start: "Start",
+          open: "Open",
+          manage: "Manage",
+          explore: "Explore",
+          configure: "Configure"
+        }
+      },
+      french: {
+        header: {
+          schoolName: "Portail d'apprentissage intelligent",
+          search: "Rechercher...",
+          language: "Langue",
+          country: "Pays",
+          theme: "Thème"
+        },
+        home: {
+          welcome: "Bienvenue",
+          greeting: "Bonjour!",
+          whatCanIDo: "Que puis-je faire pour vous?"
+        },
+        common: {
+          start: "Commencer",
+          open: "Ouvrir",
+          manage: "Gérer",
+          explore: "Explorer",
+          configure: "Configurer"
+        }
+      },
+      tamil: {
+        header: {
+          schoolName: "ஸ்மார்ட் கற்றல் போர்டல்",
+          search: "தேடல்...",
+          language: "மொழி",
+          country: "நாடு",
+          theme: "தீம்"
+        },
+        home: {
+          welcome: "வரவேற்கிறோம்",
+          greeting: "வணக்கம்!",
+          whatCanIDo: "நான் உனக்கு என்ன செய்ய முடியும்?"
+        },
+        common: {
+          start: "தொடங்கவும்",
+          open: "திறக்கவும்",
+          manage: "நிர்வகிக்கவும்",
+          explore: "ஆராயவும்",
+          configure: "கட்டமைக்கவும்"
+        }
+      },
+      hindi: {
+        header: {
+          schoolName: "स्मार्ट लर्निंग पोर्टल",
+          search: "खोजें...",
+          language: "भाषा",
+          country: "देश",
+          theme: "थीम"
+        },
+        home: {
+          welcome: "स्वागत है",
+          greeting: "गुड मॉर्निंग!",
+          whatCanIDo: "मैं आपके लिए क्या कर सकता हूं?"
+        },
+        common: {
+          start: "शुरू करें",
+          open: "खोलें",
+          manage: "प्रबंधित करें",
+          explore: "खोजें",
+          configure: "कॉन्फ़िगर करें"
+        }
+      }
+    };
+    console.log('✓ Fallback translations loaded');
   }
 
   applyTheme(theme) {
@@ -79,46 +227,92 @@ class SmartSchoolPortal {
   }
 
   updatePageLanguage() {
+    console.log(`Updating page language to: ${this.currentLanguage}`);
+    console.log('Available translations:', Object.keys(this.translations));
+    console.log('Current language translations:', this.translations[this.currentLanguage] ? '✓ Loaded' : '✗ Not loaded');
+    
     const elements = document.querySelectorAll('[data-i18n]');
-    console.log('Updating language, found elements:', elements.length);
+    console.log(`Found ${elements.length} elements with data-i18n attribute`);
     
     elements.forEach(element => {
       const key = element.getAttribute('data-i18n');
+      
+      // Store original text on first load if not already stored
+      if (!element.hasAttribute('data-i18n-original')) {
+        const originalText = element.textContent || element.placeholder || '';
+        element.setAttribute('data-i18n-original', originalText);
+      }
+      
       const translation = this.getTranslation(key);
+      const originalText = element.getAttribute('data-i18n-original');
+      
+      // Use translation if found, otherwise use original text
+      const textToUse = (translation !== key) ? translation : originalText;
       
       // Handle different element types
       if (element.tagName === 'OPTION') {
-        element.textContent = translation;
+        element.textContent = textToUse;
       } else if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
-        element.placeholder = translation;
+        element.placeholder = textToUse;
       } else if (element.tagName === 'SELECT') {
         // Skip select element itself
       } else {
-        element.textContent = translation;
+        element.textContent = textToUse;
       }
     });
 
     // Update option elements in selects
     const options = document.querySelectorAll('option[data-i18n]');
     options.forEach(option => {
+      // Store original text on first load if not already stored
+      if (!option.hasAttribute('data-i18n-original')) {
+        option.setAttribute('data-i18n-original', option.textContent);
+      }
+      
       const key = option.getAttribute('data-i18n');
       const translation = this.getTranslation(key);
-      option.textContent = translation;
+      const originalText = option.getAttribute('data-i18n-original');
+      
+      // Use translation if found, otherwise use original text
+      const textToUse = (translation !== key) ? translation : originalText;
+      option.textContent = textToUse;
     });
 
     document.documentElement.lang = this.currentLanguage;
-    console.log('✓ Page language updated to:', this.currentLanguage);
+    console.log(`✓ Page language updated to: ${this.currentLanguage}`);
   }
 
   getTranslation(key) {
+    if (!key) return '';
+    
     const keys = key.split('.');
+    
+    // Try to get translation in current language
     let value = this.translations[this.currentLanguage];
     
-    for (const k of keys) {
-      value = value?.[k];
+    if (!value) {
+      console.warn(`Translations for ${this.currentLanguage} not loaded. Available:`, Object.keys(this.translations));
+      // Fallback to English if current language not available
+      value = this.translations['english'];
     }
     
-    return value || key;
+    // Navigate through nested keys
+    for (const k of keys) {
+      if (value && typeof value === 'object') {
+        value = value[k];
+      } else {
+        value = undefined;
+        break;
+      }
+    }
+    
+    // Return translation if found, otherwise return original key as indicator
+    if (value && typeof value === 'string') {
+      return value;
+    }
+    
+    console.warn(`Translation not found for key: ${key} in language: ${this.currentLanguage}`);
+    return key;
   }
 
   checkUserSession() {
@@ -164,10 +358,15 @@ class SmartSchoolPortal {
 
     // Language switcher
     if (languageSelect) {
+      console.log('Attaching language selector change listener...');
       languageSelect.addEventListener('change', (e) => {
-        this.applyLanguage(e.target.value);
-        languageSelect.value = e.target.value; // Ensure value stays synced
+        const selectedLang = e.target.value;
+        console.log(`🌐 Language changed to: ${selectedLang}`);
+        this.applyLanguage(selectedLang);
+        console.log(`✓ Language applied: ${this.currentLanguage}`);
       });
+    } else {
+      console.warn('Language select element not found!');
     }
 
     // Search
