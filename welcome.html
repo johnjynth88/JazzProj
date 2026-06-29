@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Smart School Learning Portal</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/welcome.css">
+</head>
+<body class="theme-light welcome-page">
+    <!-- Floating Decorations -->
+    <div class="floating-shapes">
+        <div class="shape shape-1">✏️</div>
+        <div class="shape shape-2">📚</div>
+        <div class="shape shape-3">🎓</div>
+        <div class="shape shape-4">⭐</div>
+        <div class="shape shape-5">🎨</div>
+        <div class="shape shape-6">🧪</div>
+        <div class="shape shape-7">🎯</div>
+        <div class="shape shape-8">💡</div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-logo-large">
+                <div class="logo-circle">📚</div>
+            </div>
+            <h1 class="hero-title" data-i18n="welcome.mainTitle">Welcome to Smart Learning Portal</h1>
+            <p class="hero-subtitle" data-i18n="welcome.subtitle">Learn, Play, Achieve, and Explore New Possibilities!</p>
+            <p class="hero-description" data-i18n="welcome.description">Your gateway to an amazing educational journey filled with fun games, interactive quizzes, and incredible learning experiences</p>
+            
+            <button class="btn-login-primary" id="loginBtnHero" data-i18n="welcome.getStarted">Get Started - Login Here</button>
+        </div>
+
+        <!-- Animated Circles -->
+        <div class="circle-animation circle-large"></div>
+        <div class="circle-animation circle-medium"></div>
+        <div class="circle-animation circle-small"></div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <h2 class="section-title" data-i18n="welcome.whyChooseUs">Why Choose Us?</h2>
+        
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card feature-card-1">
+                <div class="feature-icon">🎮</div>
+                <h3 data-i18n="welcome.feature1Title">Fun Learning Games</h3>
+                <p data-i18n="welcome.feature1Desc">Engage with interactive games and quizzes that make learning enjoyable and memorable</p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card feature-card-2">
+                <div class="feature-icon">🏆</div>
+                <h3 data-i18n="welcome.feature2Title">Track Your Progress</h3>
+                <p data-i18n="welcome.feature2Desc">Monitor your achievements and see how much you've learned with our progress tracking</p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card feature-card-3">
+                <div class="feature-icon">🌍</div>
+                <h3 data-i18n="welcome.feature3Title">Multiple Languages</h3>
+                <p data-i18n="welcome.feature3Desc">Learn in your preferred language - English, Tamil, Hindi, or French</p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card feature-card-4">
+                <div class="feature-icon">🎨</div>
+                <h3 data-i18n="welcome.feature4Title">Creative Tools</h3>
+                <p data-i18n="welcome.feature4Desc">Express yourself with our gallery, camera, and creative features</p>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="feature-card feature-card-5">
+                <div class="feature-icon">⚡</div>
+                <h3 data-i18n="welcome.feature5Title">Quick Challenges</h3>
+                <p data-i18n="welcome.feature5Desc">Test your knowledge with fast-paced Rapid Fire rounds and puzzles</p>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="feature-card feature-card-6">
+                <div class="feature-icon">🔔</div>
+                <h3 data-i18n="welcome.feature6Title">Smart Reminders</h3>
+                <p data-i18n="welcome.feature6Desc">Never miss important tasks with our intelligent reminder system</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <h2 class="section-title" data-i18n="welcome.learningBenefits">Learning Benefits</h2>
+        
+        <div class="benefits-container">
+            <div class="benefit-item">
+                <div class="benefit-number">1</div>
+                <h3 data-i18n="welcome.benefit1">Interactive Learning</h3>
+                <p data-i18n="welcome.benefit1Desc">Engage with content through games and quizzes</p>
+            </div>
+
+            <div class="benefit-item">
+                <div class="benefit-number">2</div>
+                <h3 data-i18n="welcome.benefit2">Personal Development</h3>
+                <p data-i18n="welcome.benefit2Desc">Build skills and confidence at your own pace</p>
+            </div>
+
+            <div class="benefit-item">
+                <div class="benefit-number">3</div>
+                <h3 data-i18n="welcome.benefit3">Achievement Recognition</h3>
+                <p data-i18n="welcome.benefit3Desc">Earn badges and certificates for your accomplishments</p>
+            </div>
+
+            <div class="benefit-item">
+                <div class="benefit-number">4</div>
+                <h3 data-i18n="welcome.benefit4">Comprehensive Subjects</h3>
+                <p data-i18n="welcome.benefit4Desc">Master different subjects with our structured curriculum</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Preview Section -->
+    <section class="activities-section">
+        <h2 class="section-title" data-i18n="welcome.exploreActivities">Explore Our Activities</h2>
+        
+        <div class="activities-grid">
+            <a href="quiz.html" class="activity-box quiz-activity activity-link" title="Quiz">
+                <div class="activity-emoji">❓</div>
+                <p data-i18n="cards.quiz">Quiz</p>
+            </a>
+            <a href="puzzle.html" class="activity-box puzzle-activity activity-link" title="Puzzle">
+                <div class="activity-emoji">🧩</div>
+                <p data-i18n="cards.puzzle">Puzzle</p>
+            </a>
+            <a href="rapidfire.html" class="activity-box rapidfire-activity activity-link" title="Rapid Fire">
+                <div class="activity-emoji">⚡</div>
+                <p data-i18n="cards.rapidFire">Rapid Fire</p>
+            </a>
+            <a href="subjects.html" class="activity-box games-activity activity-link" title="Games">
+                <div class="activity-emoji">🎮</div>
+                <p data-i18n="cards.games">Games</p>
+            </a>
+            <a href="gallery.html" class="activity-box gallery-activity activity-link" title="Gallery">
+                <div class="activity-emoji">🖼️</div>
+                <p data-i18n="cards.gallery">Gallery</p>
+            </a>
+            <a href="camera.html" class="activity-box subjects-activity activity-link" title="Camera">
+                <div class="activity-emoji">📸</div>
+                <p>Camera</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <h2 class="section-title" data-i18n="welcome.studentStories">Student Success Stories</h2>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-avatar">👧</div>
+                <p class="testimonial-text" data-i18n="welcome.testimonial1">"I love this platform! The games make learning so much fun!"</p>
+                <p class="testimonial-author">- Priya, Class 4</p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-avatar">👦</div>
+                <p class="testimonial-text" data-i18n="welcome.testimonial2">"The quizzes help me practice and improve my scores!"</p>
+                <p class="testimonial-author">- Arjun, Class 5</p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-avatar">👧</div>
+                <p class="testimonial-text" data-i18n="welcome.testimonial3">"I can learn in my own language! That's amazing!"</p>
+                <p class="testimonial-author">- Ananya, Class 6</p>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-avatar">👦</div>
+                <p class="testimonial-text" data-i18n="welcome.testimonial4">"Earning achievements motivates me to learn more!"</p>
+                <p class="testimonial-author">- Rohan, Class 5</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms & Conditions Section -->
+    <section class="terms-section">
+        <h2 class="section-title" data-i18n="welcome.termsTitle">Terms & Conditions</h2>
+        
+        <div class="terms-container">
+            <div class="terms-accordion">
+                <!-- Term 1 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" data-i18n="welcome.term1Title">Student Privacy & Safety</button>
+                    <div class="accordion-content">
+                        <p data-i18n="welcome.term1Content">We protect your personal information with industry-standard security measures. Your data is never shared with third parties without parental consent. Parents can review and manage their child's profile at any time.</p>
+                    </div>
+                </div>
+
+                <!-- Term 2 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" data-i18n="welcome.term2Title">Content Guidelines</button>
+                    <div class="accordion-content">
+                        <p data-i18n="welcome.term2Content">All educational content is carefully curated and age-appropriate. Our curriculum aligns with national educational standards. We update content regularly to reflect current best practices in education.</p>
+                    </div>
+                </div>
+
+                <!-- Term 3 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" data-i18n="welcome.term3Title">User Responsibility</button>
+                    <div class="accordion-content">
+                        <p data-i18n="welcome.term3Content">Users agree to use this platform for educational purposes only. Respectful behavior is required in all interactions. Misuse, including hacking or inappropriate content, will result in account suspension.</p>
+                    </div>
+                </div>
+
+                <!-- Term 4 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" data-i18n="welcome.term4Title">Parental Involvement</button>
+                    <div class="accordion-content">
+                        <p data-i18n="welcome.term4Content">We encourage parents to stay involved in their children's learning journey. Parents receive progress reports and can set time limits. Parent accounts have full visibility into learning activities and achievements.</p>
+                    </div>
+                </div>
+
+                <!-- Term 5 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" data-i18n="welcome.term5Title">Fair Use Policy</button>
+                    <div class="accordion-content">
+                        <p data-i18n="welcome.term5Content">Users may not reproduce, distribute, or transmit any content without permission. Commercial use of platform materials is prohibited. Educational sharing within your school/family is permitted.</p>
+                    </div>
+                </div>
+
+                <!-- Term 6 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" data-i18n="welcome.term6Title">Disclaimer</button>
+                    <div class="accordion-content">
+                        <p data-i18n="welcome.term6Content">This platform is provided "as is" without warranties. We strive for accuracy but cannot guarantee all information. Users assume responsibility for evaluating the appropriateness of information for their needs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="terms-checkbox">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="agreeTerms" name="agreeTerms">
+                    <span data-i18n="welcome.agreeTerms">I have read and agree to the Terms & Conditions</span>
+                </label>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 data-i18n="welcome.readyToLearn">Ready to Start Your Learning Journey?</h2>
+            <p data-i18n="welcome.ctaDescription">Join thousands of students who are already learning and achieving their goals!</p>
+            <button class="btn-login-large" id="loginBtnCTA" data-i18n="welcome.loginNow">Login Now</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="welcome-footer">
+        <div class="footer-content">
+            <p data-i18n="welcome.footerText">&copy; 2024 Smart School Learning Portal. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#" data-i18n="welcome.privacyPolicy">Privacy Policy</a>
+                <span class="divider">•</span>
+                <a href="#" data-i18n="welcome.contactUs">Contact Us</a>
+                <span class="divider">•</span>
+                <a href="#" data-i18n="welcome.about">About Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeLoginModal">&times;</button>
+            
+            <div class="modal-header">
+                <div class="modal-logo">📚</div>
+                <h2 class="modal-title">Smart School Login</h2>
+                <p class="modal-subtitle">Enter your credentials to continue</p>
+            </div>
+
+            <!-- Login/Signup Tabs -->
+            <div class="modal-tabs">
+                <button class="modal-tab-btn active" id="modalLoginTab">Login</button>
+                <button class="modal-tab-btn" id="modalSignupTab">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <div class="modal-form-content active" id="modalLoginForm">
+                <form class="login-form" id="welcomeLoginForm">
+                    <div class="form-group">
+                        <label for="modalLoginEmail">Email Address</label>
+                        <input type="email" id="modalLoginEmail" name="email" placeholder="Enter your email" required>
+                        <span class="form-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modalLoginPassword">Password</label>
+                        <input type="password" id="modalLoginPassword" name="password" placeholder="Enter your password" required>
+                        <span class="form-error"></span>
+                    </div>
+
+                    <div class="remember-forgot">
+                        <label class="remember-me">
+                            <input type="checkbox" id="modalRememberMe" name="rememberMe">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="login-submit-btn">Sign In</button>
+                </form>
+            </div>
+
+            <!-- Signup Form -->
+            <div class="modal-form-content" id="modalSignupForm">
+                <form class="login-form" id="welcomeSignupForm">
+                    <div class="form-group">
+                        <label for="modalSignupName">Full Name</label>
+                        <input type="text" id="modalSignupName" name="name" placeholder="Enter your full name" required>
+                        <span class="form-error"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modalSignupEmail">Email</label>
+                            <input type="email" id="modalSignupEmail" name="email" placeholder="Your email" required>
+                            <span class="form-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="modalSignupAge">Age</label>
+                            <input type="number" id="modalSignupAge" name="age" placeholder="Age" min="5" max="25" required>
+                            <span class="form-error"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="gender" value="male" required> Male
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="gender" value="female"> Female
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="gender" value="other"> Other
+                            </label>
+                        </div>
+                        <span class="form-error"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modalSignupClass">Class</label>
+                            <select id="modalSignupClass" name="class" required>
+                                <option value="">Select Class</option>
+                                <option value="1">Class 1</option>
+                                <option value="2">Class 2</option>
+                                <option value="3">Class 3</option>
+                                <option value="4">Class 4</option>
+                                <option value="5">Class 5</option>
+                                <option value="6">Class 6</option>
+                                <option value="7">Class 7</option>
+                                <option value="8">Class 8</option>
+                                <option value="9">Class 9</option>
+                                <option value="10">Class 10</option>
+                            </select>
+                            <span class="form-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="modalSignupPassword">Password</label>
+                            <input type="password" id="modalSignupPassword" name="password" placeholder="Create password" required>
+                            <span class="form-error"></span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="login-submit-btn">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/welcome.js"></script>
+</body>
+</html>

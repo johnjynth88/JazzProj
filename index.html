@@ -27,42 +27,82 @@
                 <input type="text" class="search-box" placeholder="Search..." data-i18n="header.search" />
             </div>
 
-            <div class="header-selectors">
-                <select class="selector" id="languageSelect" data-i18n="header.language">
-                    <option value="english">English</option>
-                    <option value="tamil">Tamil</option>
-                    <option value="french">Français</option>
-                    <option value="hindi">हिंदी</option>
-                </select>
-                <select class="selector" id="countrySelect" data-i18n="header.country">
-                    <option value="india">India</option>
-                    <option value="usa">USA</option>
-                    <option value="uk">UK</option>
-                </select>
-                <select class="selector" id="themeSelect" data-i18n="header.theme">
-                    <option value="light">Light</option>
-                    <option value="dark">Dark</option>
-                    <option value="school">School</option>
-                    <option value="nature">Nature</option>
-                    <option value="space">Space</option>
-                    <option value="cartoon">Cartoon</option>
-                    <option value="rainbow">Rainbow</option>
-                </select>
-            </div>
+            <div class="header-right">
+                <div class="header-timer">
+                    <div class="timer-display">
+                        <span class="timer-icon">⏱️</span>
+                        <span class="timer-text" id="timerDisplay">00:00:00</span>
+                    </div>
+                </div>
 
-            <div class="header-actions">
-                <button class="action-btn" data-notification title="Notifications">🔔
-                    <span class="notification-badge">3</span>
+                <div class="header-selectors">
+                    <select class="selector" id="languageSelect" data-i18n="header.language">
+                        <option value="english" data-i18n="header.options.english">English</option>
+                        <option value="tamil" data-i18n="header.options.tamil">Tamil</option>
+                        <option value="french" data-i18n="header.options.french">Français</option>
+                        <option value="hindi" data-i18n="header.options.hindi">हिंदी</option>
+                    </select>
+                    <select class="selector" id="countrySelect" data-i18n="header.country">
+                        <option value="india" data-i18n="header.options.india">India</option>
+                        <option value="usa" data-i18n="header.options.usa">USA</option>
+                        <option value="uk" data-i18n="header.options.uk">UK</option>
+                    </select>
+                    <select class="selector" id="themeSelect" data-i18n="header.theme">
+                        <option value="light" data-i18n="header.options.light">Light</option>
+                        <option value="dark" data-i18n="header.options.dark">Dark</option>
+                        <option value="school" data-i18n="header.options.school">School</option>
+                        <option value="nature" data-i18n="header.options.nature">Nature</option>
+                        <option value="space" data-i18n="header.options.space">Space</option>
+                        <option value="cartoon" data-i18n="header.options.cartoon">Cartoon</option>
+                        <option value="rainbow" data-i18n="header.options.rainbow">Rainbow</option>
+                    </select>
+                </div>
+
+                <div class="header-actions">
+                    <button class="action-btn" data-notification title="Notifications">🔔
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <button class="action-btn profile-btn" id="profileBtn" title="Profile">👤
+                        <!-- Profile Popover -->
+                        <div class="profile-popover" id="profilePopover">
+                            <div class="popover-header">
+                                <div class="user-avatar">👤</div>
+                                <div class="user-info">
+                                    <h3 class="user-name" id="userNameDisplay">User</h3>
+                                    <p class="user-email" id="userEmailDisplay">user@example.com</p>
+                                </div>
+                            </div>
+                            <div class="popover-divider"></div>
+                            <div class="popover-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">Class:</span>
+                                    <span class="detail-value" id="userClassDisplay">-</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Age:</span>
+                                    <span class="detail-value" id="userAgeDisplay">-</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Gender:</span>
+                                    <span class="detail-value" id="userGenderDisplay">-</span>
+                                </div>
+                            </div>
+                            <div class="popover-actions">
+                                <a href="profile.html" class="popover-link">📋 View Full Profile</a>
+                                <a href="profile.html?edit=true" class="popover-link">✏️ Edit Profile</a>
+                            </div>
+                        </div>
+                    </button>
+                    <button class="action-btn" id="settingsBtn" title="Settings">⚙️</button>
+                    <button class="action-btn logout-btn" id="logoutBtn" title="Logout">🚪</button>
+                </div>
+
+                <button class="hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
-                <button class="action-btn" data-profile title="Profile">👤</button>
-                <button class="action-btn" title="Settings">⚙️</button>
             </div>
-
-            <button class="hamburger-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
     </header>
 
@@ -166,13 +206,35 @@
     </main>
 
     <!-- Floating Action Button -->
-    <button class="fab" id="fabBtn">+</button>
+    <button class="fab" id="fabBtn" title="Chat Assistant">💬</button>
 
-    <!-- FAB Menu -->
-    <div id="fabMenu" style="display: none; position: fixed; bottom: 100px; right: 20px; z-index: 40;">
-        <button class="fab" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-color); width: 45px; height: 45px; font-size: 1.2rem;" title="Camera">📷</button>
-        <button class="fab" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-color); width: 45px; height: 45px; font-size: 1.2rem; margin-top: 0.5rem;" title="Reminder">⏰</button>
-        <button class="fab" style="background: rgba(99, 102, 241, 0.2); color: var(--primary-color); width: 45px; height: 45px; font-size: 1.2rem; margin-top: 0.5rem;" title="Quiz">📝</button>
+    <!-- Chatbot Window -->
+    <div id="chatbotContainer" class="chatbot-container">
+        <div class="chatbot-header">
+            <h3>🎓 Study Assistant</h3>
+            <button class="chatbot-close" id="closeChatbot">×</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="chat-message bot-message">
+                <div class="message-content">
+                    👋 Hello! I'm your Study Assistant. I can help you navigate through different learning activities. What would you like to do?
+                </div>
+            </div>
+        </div>
+        <div class="chatbot-input-area">
+            <div class="quick-buttons">
+                <button class="quick-btn" data-action="quiz">📝 Take Quiz</button>
+                <button class="quick-btn" data-action="puzzle">🧩 Solve Puzzle</button>
+                <button class="quick-btn" data-action="subjects">📚 Browse Subjects</button>
+                <button class="quick-btn" data-action="gallery">🖼️ Gallery</button>
+                <button class="quick-btn" data-action="rapidfire">⚡ Rapid Fire</button>
+                <button class="quick-btn" data-action="camera">📷 Camera</button>
+            </div>
+            <div class="input-wrapper">
+                <input type="text" id="chatInput" class="chat-input" placeholder="Ask me anything..." />
+                <button class="send-btn" id="sendBtn">➤</button>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->
@@ -180,6 +242,8 @@
     <script src="js/validation.js"></script>
     <script src="js/storage.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/chatbot.js"></script>
     
     <script>
         // Initialize page with quote
@@ -205,12 +269,6 @@
                 document.getElementById('languageSelect').value = window.portal.currentLanguage;
                 document.getElementById('themeSelect').value = window.portal.currentTheme;
             }
-
-            // FAB Toggle
-            document.getElementById('fabBtn').addEventListener('click', () => {
-                const fabMenu = document.getElementById('fabMenu');
-                fabMenu.style.display = fabMenu.style.display === 'none' ? 'block' : 'none';
-            });
 
             // Check if user is logged in
             const user = StorageManager.getUser();

@@ -30,6 +30,9 @@ class SmartSchoolPortal {
     // Initialize event listeners
     this.setupEventListeners();
     
+    // Display user profile in popover
+    this.displayUserProfile();
+    
     // Initialize modules
     this.initializeModules();
     
@@ -77,13 +80,34 @@ class SmartSchoolPortal {
 
   updatePageLanguage() {
     const elements = document.querySelectorAll('[data-i18n]');
+    console.log('Updating language, found elements:', elements.length);
+    
     elements.forEach(element => {
       const key = element.getAttribute('data-i18n');
       const translation = this.getTranslation(key);
-      element.textContent = translation;
+      
+      // Handle different element types
+      if (element.tagName === 'OPTION') {
+        element.textContent = translation;
+      } else if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
+        element.placeholder = translation;
+      } else if (element.tagName === 'SELECT') {
+        // Skip select element itself
+      } else {
+        element.textContent = translation;
+      }
+    });
+
+    // Update option elements in selects
+    const options = document.querySelectorAll('option[data-i18n]');
+    options.forEach(option => {
+      const key = option.getAttribute('data-i18n');
+      const translation = this.getTranslation(key);
+      option.textContent = translation;
     });
 
     document.documentElement.lang = this.currentLanguage;
+    console.log('✓ Page language updated to:', this.currentLanguage);
   }
 
   getTranslation(key) {
@@ -106,35 +130,45 @@ class SmartSchoolPortal {
   }
 
   showLoginView() {
-    if (window.location.pathname !== '/login.html') {
-      window.location.href = 'login.html';
+    const currentPath = window.location.pathname.toLowerCase();
+    if (currentPath !== '/welcome.html' && currentPath !== '/login.html' && !currentPath.includes('login')) {
+      window.location.href = 'welcome.html';
     }
   }
 
   showLoggedInView() {
-    if (window.location.pathname === '/login.html') {
+    const currentPath = window.location.pathname.toLowerCase();
+    if (currentPath.includes('login') || currentPath.includes('welcome')) {
       window.location.href = 'dashboard.html';
     }
   }
 
   setupEventListeners() {
+    // Sync select values with current preferences
+    const themeSelect = document.getElementById('themeSelect');
+    const languageSelect = document.getElementById('languageSelect');
+    
+    if (themeSelect) {
+      themeSelect.value = this.currentTheme;
+    }
+    if (languageSelect) {
+      languageSelect.value = this.currentLanguage;
+    }
+
     // Theme switcher
-    const themeSelectors = document.querySelectorAll('[data-theme]');
-    themeSelectors.forEach(selector => {
-      selector.addEventListener('click', (e) => {
-        const theme = e.target.getAttribute('data-theme');
-        this.applyTheme(theme);
+    if (themeSelect) {
+      themeSelect.addEventListener('change', (e) => {
+        this.applyTheme(e.target.value);
       });
-    });
+    }
 
     // Language switcher
-    const langSelectors = document.querySelectorAll('[data-language]');
-    langSelectors.forEach(selector => {
-      selector.addEventListener('click', (e) => {
-        const lang = e.target.getAttribute('data-language');
-        this.applyLanguage(lang);
+    if (languageSelect) {
+      languageSelect.addEventListener('change', (e) => {
+        this.applyLanguage(e.target.value);
+        languageSelect.value = e.target.value; // Ensure value stays synced
       });
-    });
+    }
 
     // Search
     const searchBox = document.querySelector('.search-box');
@@ -160,17 +194,91 @@ class SmartSchoolPortal {
       notificationBtn.addEventListener('click', () => this.showNotifications());
     }
 
-    // Profile menu
-    const profileBtn = document.querySelector('[data-profile]');
+    // Profile popover
+    const profileBtn = document.getElementById('profileBtn');
     if (profileBtn) {
-      profileBtn.addEventListener('click', () => this.showProfileMenu());
+      profileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.toggleProfilePopover();
+      });
     }
 
-    // Logout
-    const logoutBtn = document.querySelector('[data-logout]');
+    // Logout button
+    const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
       logoutBtn.addEventListener('click', () => this.logout());
     }
+
+    // Settings button
+    const settingsBtn = document.getElementById('settingsBtn');
+    if (settingsBtn) {
+      settingsBtn.addEventListener('click', () => {
+        window.location.href = 'profile.html';
+      });
+    }
+
+    // Close popover when clicking outside
+    document.addEventListener('click', (e) => {
+      const profilePopover = document.getElementById('profilePopover');
+      const profileBtn = document.getElementById('profileBtn');
+      if (profilePopover && profileBtn && 
+          !profilePopover.contains(e.target) && 
+          !profileBtn.contains(e.target)) {
+        profilePopover.classList.remove('active');
+      }
+    });
+
+    // Initialize profile display
+    this.displayUserProfile();
+  }
+
+  toggleProfilePopover() {
+    const profilePopover = document.getElementById('profilePopover');
+    if (profilePopover) {
+      profilePopover.classList.toggle('active');
+    }
+  }
+
+  displayUserProfile() {
+    if (this.currentUser) {
+      const userName = this.currentUser.name || this.currentUser.email || 'User';
+      const userEmail = this.currentUser.email || 'user@example.com';
+      const userClass = this.currentUser.class || '-';
+      const userAge = this.currentUser.age || '-';
+      const userGender = this.currentUser.gender || '-';
+
+      // Update popover
+      const userNameEl = document.getElementById('userNameDisplay');
+      const userEmailEl = document.getElementById('userEmailDisplay');
+      const userClassEl = document.getElementById('userClassDisplay');
+      const userAgeEl = document.getElementById('userAgeDisplay');
+      const userGenderEl = document.getElementById('userGenderDisplay');
+
+      if (userNameEl) userNameEl.textContent = userName;
+      if (userEmailEl) userEmailEl.textContent = userEmail;
+      if (userClassEl) userClassEl.textContent = userClass;
+      if (userAgeEl) userAgeEl.textContent = userAge;
+      if (userGenderEl) userGenderEl.textContent = userGender;
+
+      // Add visual indicator that user is logged in
+      const profileBtn = document.getElementById('profileBtn');
+      if (profileBtn) {
+        profileBtn.style.background = 'rgba(255, 255, 255, 0.3)';
+        profileBtn.title = `Logged in as ${userName}`;
+      }
+
+      console.log('✓ Profile data loaded for:', userName);
+    }
+  }
+
+  logout() {
+    // Clear user data
+    localStorage.removeItem('portal_user');
+    localStorage.removeItem('portal_theme');
+    localStorage.removeItem('portal_language');
+
+    // Redirect to welcome page
+    window.location.href = 'welcome.html';
   }
 
   handleSearch(event) {

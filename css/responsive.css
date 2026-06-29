@@ -15,6 +15,7 @@
   main {
     margin: 3rem auto;
     padding: 0 3rem;
+    box-sizing: border-box;
   }
 
   .grid-auto {
@@ -46,6 +47,7 @@
   main {
     margin: 2rem auto;
     padding: 0 2rem;
+    box-sizing: border-box;
   }
 }
 
@@ -104,6 +106,46 @@
     font-size: 14px;
   }
 
+  header {
+    padding: 0.6rem 1rem;
+  }
+
+  .header-right {
+    gap: 0.5rem;
+  }
+
+  .header-middle {
+    max-width: 200px;
+  }
+
+  .header-timer {
+    min-width: 85px;
+    padding: 0.35rem 0.6rem;
+  }
+
+  .timer-text {
+    font-size: 0.8rem;
+  }
+
+  .header-selectors {
+    gap: 0.5rem;
+  }
+
+  .selector {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .header-actions {
+    gap: 0.5rem;
+  }
+
+  .action-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+
   .grid-3,
   .grid-4,
   .grid-2 {
@@ -117,67 +159,16 @@
   main {
     margin: 1.5rem auto;
     padding: 0 1.5rem;
+    box-sizing: border-box;
   }
 
-  header {
-    padding: 0.75rem 1.5rem;
+  .reminder-filter-tabs {
+    gap: 0.6rem;
   }
 
-  .header-container {
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .header-middle {
-    width: 100%;
-    order: 3;
-    gap: 0.75rem;
-  }
-
-  .search-box {
-    max-width: 100%;
-  }
-
-  .header-selectors {
-    gap: 0.5rem;
-    order: 2;
-  }
-
-  .header-actions {
-    gap: 1rem;
-  }
-
-  .action-btn {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
-  }
-
-  .selector {
-    padding: 0.4rem 0.6rem;
+  .reminder-filter-btn {
+    padding: 0.55rem 1rem;
     font-size: 0.85rem;
-  }
-
-  .card {
-    padding: 1.25rem;
-  }
-
-  .btn {
-    padding: 0.65rem 1.25rem;
-    font-size: 0.9rem;
-  }
-
-  .fab {
-    width: 50px;
-    height: 50px;
-    font-size: 1.25rem;
-    bottom: 1rem;
-    right: 1rem;
-  }
-
-  .modal-content {
-    max-width: 90%;
-    padding: 1.5rem;
   }
 }
 
@@ -185,6 +176,56 @@
 @media (min-width: 576px) and (max-width: 767px) {
   html {
     font-size: 13px;
+  }
+
+  header {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .header-right {
+    gap: 0.4rem;
+  }
+
+  .header-middle {
+    display: none;
+  }
+
+  .header-timer {
+    min-width: 75px;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .timer-text {
+    font-size: 0.7rem;
+  }
+
+  .header-selectors {
+    gap: 0.4rem;
+  }
+
+  .selector {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .header-actions {
+    gap: 0.4rem;
+  }
+
+  .action-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 0.95rem;
+  }
+
+  .hamburger-menu {
+    display: flex;
+  }
+
+  .profile-popover {
+    width: 280px;
+    right: 0.5rem;
+    top: 50px;
   }
 
   .grid-auto,
@@ -198,90 +239,16 @@
   main {
     margin: 1rem auto;
     padding: 0 1rem;
+    box-sizing: border-box;
   }
 
-  header {
-    padding: 0.75rem 1rem;
-  }
-
-  .header-container {
-    flex-wrap: wrap;
+  .reminder-filter-tabs {
     gap: 0.5rem;
   }
 
-  .logo-section h1 {
-    font-size: 1.25rem;
-  }
-
-  .logo-icon {
-    width: 35px;
-    height: 35px;
-  }
-
-  .search-box {
-    display: none;
-  }
-
-  .hamburger-menu {
-    display: flex;
-  }
-
-  .header-middle {
-    display: none;
-  }
-
-  .header-selectors {
-    gap: 0.25rem;
+  .reminder-filter-btn {
+    padding: 0.5rem 0.8rem;
     font-size: 0.8rem;
-  }
-
-  .selector {
-    padding: 0.35rem 0.5rem;
-    font-size: 0.8rem;
-  }
-
-  .action-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 0.9rem;
-  }
-
-  .card {
-    padding: 1rem;
-  }
-
-  .card-title {
-    font-size: 1.1rem;
-  }
-
-  .card-icon {
-    font-size: 1.75rem;
-  }
-
-  .btn {
-    padding: 0.6rem 1rem;
-    font-size: 0.85rem;
-  }
-
-  .fab {
-    width: 48px;
-    height: 48px;
-    font-size: 1.2rem;
-    bottom: 1rem;
-    right: 1rem;
-  }
-
-  .modal-content {
-    max-width: 95%;
-    padding: 1.25rem;
-  }
-
-  table {
-    font-size: 0.85rem;
-  }
-
-  td, th {
-    padding: 0.75rem;
   }
 }
 
@@ -289,6 +256,104 @@
 @media (max-width: 575px) {
   html {
     font-size: 12px;
+  }
+
+  header {
+    padding: 0.5rem 0.5rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    box-sizing: border-box;
+  }
+
+  body {
+    padding-top: 50px;
+  }
+
+  .header-container {
+    gap: 0.25rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .logo-section {
+    gap: 0.4rem;
+    min-width: fit-content;
+    flex-shrink: 0;
+  }
+
+  .logo-section h1 {
+    font-size: 0.9rem;
+    display: none;
+  }
+
+  .logo-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+
+  .header-middle {
+    display: none;
+  }
+
+  .search-box {
+    display: none;
+  }
+
+  .header-right {
+    gap: 0.35rem;
+  }
+
+  .header-timer {
+    min-width: 68px;
+    padding: 0.25rem 0.4rem;
+    font-size: 0.75rem;
+    order: 2;
+    flex-shrink: 0;
+  }
+
+  .timer-text {
+    font-size: 0.65rem;
+  }
+
+  .timer-icon {
+    font-size: 0.85rem;
+  }
+
+  .header-selectors {
+    display: none;
+    gap: 0.25rem;
+  }
+
+  .selector {
+    padding: 0.3rem 0.4rem;
+    font-size: 0.7rem;
+  }
+
+  .header-actions {
+    gap: 0.35rem;
+    order: 3;
+    flex-shrink: 0;
+  }
+
+  .action-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+  }
+
+  .hamburger-menu {
+    display: flex;
+    order: 4;
+  }
+
+  .profile-popover {
+    width: calc(100vw - 20px) !important;
+    right: -120px !important;
+    left: auto;
+    max-width: 280px;
   }
 
   .grid-auto,
@@ -302,50 +367,7 @@
   main {
     margin: 1rem auto;
     padding: 0 1rem;
-  }
-
-  header {
-    padding: 0.75rem 1rem;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-  }
-
-  body {
-    padding-top: 60px;
-  }
-
-  .header-container {
-    gap: 0.5rem;
-  }
-
-  .logo-section {
-    gap: 0.5rem;
-  }
-
-  .logo-section h1 {
-    font-size: 1rem;
-    display: none;
-  }
-
-  .logo-icon {
-    width: 32px;
-    height: 32px;
-    font-size: 1.25rem;
-  }
-
-  .header-middle {
-    display: none;
-  }
-
-  .search-box {
-    display: none;
-  }
-
-  .hamburger-menu {
-    display: flex;
-    order: 3;
+    box-sizing: border-box;
   }
 
   .header-selectors {
@@ -361,6 +383,22 @@
     width: 32px;
     height: 32px;
     font-size: 0.9rem;
+  }
+
+  .profile-popover {
+    width: calc(100vw - 20px);
+    right: 10px !important;
+    top: 50px !important;
+    left: auto;
+    max-width: 280px;
+  }
+
+  .grid-auto,
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .card {
@@ -382,7 +420,8 @@
   .btn {
     padding: 0.5rem 0.75rem;
     font-size: 0.75rem;
-    width: 100%;
+    width: auto;
+    display: inline-flex;
   }
 
   .btn-primary,
@@ -390,7 +429,18 @@
   .btn-outline,
   .btn-danger,
   .btn-success {
-    width: 100%;
+    width: auto;
+    display: inline-flex;
+  }
+
+  .reminder-filter-tabs {
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .reminder-filter-btn {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.75rem;
   }
 
   .fab {
@@ -444,6 +494,44 @@
 
   .progress {
     height: 6px;
+  }
+
+  /* ========== CHATBOT MOBILE ========== */
+  .chatbot-container {
+    width: calc(100vw - 20px) !important;
+    height: 500px !important;
+    right: 10px !important;
+    left: 10px !important;
+  }
+
+  .chatbot-messages {
+    padding: 0.75rem;
+  }
+
+  .message-content {
+    max-width: 90%;
+    font-size: 0.85rem;
+  }
+
+  .quick-buttons {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .quick-btn {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .chat-input {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .send-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
   }
 
   .gap-1 { gap: 0.25rem; }
@@ -510,6 +598,12 @@
   .btn {
     padding: 0.4rem 0.6rem;
     font-size: 0.7rem;
+  }
+
+  /* Reminder Filter Buttons */
+  .reminder-filter-btn {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.8rem;
   }
 }
 
