@@ -325,15 +325,20 @@ class SmartSchoolPortal {
 
   showLoginView() {
     const currentPath = window.location.pathname.toLowerCase();
-    if (currentPath !== '/welcome.html' && currentPath !== '/login.html' && !currentPath.includes('login')) {
+    const fileName = window.location.href.toLowerCase();
+    
+    // Don't redirect if already on welcome or login page
+    if (!fileName.includes('welcome') && !fileName.includes('login')) {
       window.location.href = 'welcome.html';
     }
   }
 
   showLoggedInView() {
-    const currentPath = window.location.pathname.toLowerCase();
-    if (currentPath.includes('login') || currentPath.includes('welcome')) {
-      window.location.href = 'dashboard.html';
+    const fileName = window.location.href.toLowerCase();
+    
+    // Don't redirect if already on index page
+    if (fileName.includes('login') || fileName.includes('welcome')) {
+      window.location.href = 'index.html';
     }
   }
 

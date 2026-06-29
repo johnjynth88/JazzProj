@@ -10,385 +10,567 @@
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/animation.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/welcome.css">
 </head>
-<body class="theme-light welcome-page">
-    <!-- Floating Decorations -->
-    <div class="floating-shapes">
-        <div class="shape shape-1">✏️</div>
-        <div class="shape shape-2">📚</div>
-        <div class="shape shape-3">🎓</div>
-        <div class="shape shape-4">⭐</div>
-        <div class="shape shape-5">🎨</div>
-        <div class="shape shape-6">🧪</div>
-        <div class="shape shape-7">🎯</div>
-        <div class="shape shape-8">💡</div>
-    </div>
+<body class="theme-light">
+    <!-- Navigation Bar -->
+    <header class="welcome-header">
+        <div class="header-container">
+            <a href="welcome.html" class="logo-section">
+                <div class="logo-icon">📚</div>
+                <h1 data-i18n="header.schoolName">Smart Learning Portal</h1>
+            </a>
+            <a href="login.html" class="btn btn-primary" id="topLoginBtn" data-i18n="header.login">Login</a>
+        </div>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
+    <!-- Hero Section with Interactive Animation -->
+    <section class="welcome-hero">
+        <div class="hero-background">
+            <div class="floating-blob blob-1"></div>
+            <div class="floating-blob blob-2"></div>
+            <div class="floating-blob blob-3"></div>
+        </div>
+
         <div class="hero-content">
-            <div class="hero-logo-large">
-                <div class="logo-circle">📚</div>
-            </div>
+            <div class="hero-emoji-large animate-bounce">📚</div>
             <h1 class="hero-title" data-i18n="welcome.mainTitle">Welcome to Smart Learning Portal</h1>
             <p class="hero-subtitle" data-i18n="welcome.subtitle">Learn, Play, Achieve, and Explore New Possibilities!</p>
             <p class="hero-description" data-i18n="welcome.description">Your gateway to an amazing educational journey filled with fun games, interactive quizzes, and incredible learning experiences</p>
             
-            <button class="btn-login-primary" id="loginBtnHero" data-i18n="welcome.getStarted">Get Started - Login Here</button>
+            <div class="hero-buttons">
+                <a href="login.html" class="btn btn-primary btn-lg" data-i18n="welcome.getStarted">Get Started - Login Here</a>
+                <button class="btn btn-outline btn-lg scroll-btn" id="scrollBtn" data-i18n="common.explore">Explore Features</button>
+            </div>
         </div>
 
-        <!-- Animated Circles -->
-        <div class="circle-animation circle-large"></div>
-        <div class="circle-animation circle-medium"></div>
-        <div class="circle-animation circle-small"></div>
+        <div class="hero-preview">
+            <div class="preview-card preview-quiz animate-float">
+                <div class="preview-icon">❓</div>
+                <p data-i18n="cards.quiz">Quiz</p>
+            </div>
+            <div class="preview-card preview-puzzle animate-float">
+                <div class="preview-icon">🧩</div>
+                <p data-i18n="cards.puzzle">Puzzle</p>
+            </div>
+            <div class="preview-card preview-gallery animate-float">
+                <div class="preview-icon">🖼️</div>
+                <p data-i18n="cards.gallery">Gallery</p>
+            </div>
+            <div class="preview-card preview-rapid animate-float">
+                <div class="preview-icon">⚡</div>
+                <p data-i18n="cards.rapidFire">Rapid Fire</p>
+            </div>
+        </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features-section">
+    <!-- Feature Glimpses Section -->
+    <section class="feature-glimpses">
+        <h2 class="section-title" data-i18n="welcome.whatCanYouDo">What Can You Do?</h2>
+        
+        <div class="glimpses-container">
+            <!-- Quiz Glimpse -->
+            <div class="glimpse-card glimpse-quiz">
+                <div class="glimpse-header">
+                    <div class="glimpse-icon">❓</div>
+                    <h3 data-i18n="cards.quiz">Quiz</h3>
+                </div>
+                <p>Test your knowledge with interactive quizzes</p>
+                <div class="glimpse-preview">
+                    <div class="quiz-question">Q: What is 2 + 2?</div>
+                    <div class="quiz-options">
+                        <div class="option">3</div>
+                        <div class="option">4</div>
+                        <div class="option">5</div>
+                    </div>
+                </div>
+                <a href="login.html" class="btn btn-sm btn-primary" data-i18n="common.start">Start</a>
+            </div>
+
+            <!-- Puzzle Glimpse -->
+            <div class="glimpse-card glimpse-puzzle">
+                <div class="glimpse-header">
+                    <div class="glimpse-icon">🧩</div>
+                    <h3 data-i18n="cards.puzzle">Puzzle</h3>
+                </div>
+                <p>Solve interesting puzzles that challenge you</p>
+                <div class="glimpse-preview puzzle-grid">
+                    <div class="puzzle-piece"></div>
+                    <div class="puzzle-piece"></div>
+                    <div class="puzzle-piece"></div>
+                    <div class="puzzle-piece"></div>
+                </div>
+                <a href="login.html" class="btn btn-sm btn-primary" data-i18n="common.start">Start</a>
+            </div>
+
+            <!-- Gallery Glimpse -->
+            <div class="glimpse-card glimpse-gallery">
+                <div class="glimpse-header">
+                    <div class="glimpse-icon">🖼️</div>
+                    <h3 data-i18n="cards.gallery">Gallery</h3>
+                </div>
+                <p>Create and explore visual content</p>
+                <div class="glimpse-preview gallery-grid">
+                    <div class="gallery-thumb"></div>
+                    <div class="gallery-thumb"></div>
+                    <div class="gallery-thumb"></div>
+                    <div class="gallery-thumb"></div>
+                </div>
+                <a href="login.html" class="btn btn-sm btn-primary" data-i18n="common.view">View</a>
+            </div>
+
+            <!-- Rapid Fire Glimpse -->
+            <div class="glimpse-card glimpse-rapid">
+                <div class="glimpse-header">
+                    <div class="glimpse-icon">⚡</div>
+                    <h3 data-i18n="cards.rapidFire">Rapid Fire</h3>
+                </div>
+                <p>Quick fire questions to test knowledge</p>
+                <div class="glimpse-preview rapid-timer">
+                    <div class="timer-circle">
+                        <span class="timer-text">10s</span>
+                    </div>
+                </div>
+                <a href="login.html" class="btn btn-sm btn-primary" data-i18n="common.start">Start</a>
+            </div>
+
+            <!-- Reminder Glimpse -->
+            <div class="glimpse-card glimpse-reminder">
+                <div class="glimpse-header">
+                    <div class="glimpse-icon">🔔</div>
+                    <h3 data-i18n="cards.reminder">Reminder</h3>
+                </div>
+                <p>Manage tasks and never miss deadlines</p>
+                <div class="glimpse-preview reminder-list">
+                    <div class="reminder-item">✓ Complete homework</div>
+                    <div class="reminder-item">✓ Study for exam</div>
+                    <div class="reminder-item">✓ Project submission</div>
+                </div>
+                <a href="login.html" class="btn btn-sm btn-primary" data-i18n="common.manage">Manage</a>
+            </div>
+
+            <!-- Subjects Glimpse -->
+            <div class="glimpse-card glimpse-subjects">
+                <div class="glimpse-header">
+                    <div class="glimpse-icon">📖</div>
+                    <h3 data-i18n="cards.subjects">Subjects</h3>
+                </div>
+                <p>Comprehensive learning materials for all</p>
+                <div class="glimpse-preview subjects-list">
+                    <div class="subject-item">Mathematics</div>
+                    <div class="subject-item">Science</div>
+                    <div class="subject-item">Languages</div>
+                </div>
+                <a href="login.html" class="btn btn-sm btn-primary" data-i18n="common.explore">Explore</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose-us">
         <h2 class="section-title" data-i18n="welcome.whyChooseUs">Why Choose Us?</h2>
         
-        <div class="features-grid">
-            <!-- Feature 1 -->
-            <div class="feature-card feature-card-1">
-                <div class="feature-icon">🎮</div>
-                <h3 data-i18n="welcome.feature1Title">Fun Learning Games</h3>
-                <p data-i18n="welcome.feature1Desc">Engage with interactive games and quizzes that make learning enjoyable and memorable</p>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-icon">🎮</div>
+                <h3 data-i18n="welcome.feature1Title">Fun Games</h3>
+                <p data-i18n="welcome.feature1Desc">Engage with interactive games and quizzes</p>
             </div>
-
-            <!-- Feature 2 -->
-            <div class="feature-card feature-card-2">
-                <div class="feature-icon">🏆</div>
-                <h3 data-i18n="welcome.feature2Title">Track Your Progress</h3>
-                <p data-i18n="welcome.feature2Desc">Monitor your achievements and see how much you've learned with our progress tracking</p>
+            <div class="benefit-item">
+                <div class="benefit-icon">📊</div>
+                <h3 data-i18n="welcome.feature2Title">Track Progress</h3>
+                <p data-i18n="welcome.feature2Desc">Monitor your achievements and growth</p>
             </div>
-
-            <!-- Feature 3 -->
-            <div class="feature-card feature-card-3">
-                <div class="feature-icon">🌍</div>
-                <h3 data-i18n="welcome.feature3Title">Multiple Languages</h3>
-                <p data-i18n="welcome.feature3Desc">Learn in your preferred language - English, Tamil, Hindi, or French</p>
+            <div class="benefit-item">
+                <div class="benefit-icon">🌐</div>
+                <h3 data-i18n="welcome.feature3Title">Multi-Language</h3>
+                <p data-i18n="welcome.feature3Desc">Learn in your preferred language</p>
             </div>
-
-            <!-- Feature 4 -->
-            <div class="feature-card feature-card-4">
-                <div class="feature-icon">🎨</div>
+            <div class="benefit-item">
+                <div class="benefit-icon">🎨</div>
                 <h3 data-i18n="welcome.feature4Title">Creative Tools</h3>
-                <p data-i18n="welcome.feature4Desc">Express yourself with our gallery, camera, and creative features</p>
+                <p data-i18n="welcome.feature4Desc">Gallery, camera, and creative features</p>
             </div>
-
-            <!-- Feature 5 -->
-            <div class="feature-card feature-card-5">
-                <div class="feature-icon">⚡</div>
+            <div class="benefit-item">
+                <div class="benefit-icon">⚡</div>
                 <h3 data-i18n="welcome.feature5Title">Quick Challenges</h3>
-                <p data-i18n="welcome.feature5Desc">Test your knowledge with fast-paced Rapid Fire rounds and puzzles</p>
+                <p data-i18n="welcome.feature5Desc">Fast-paced Rapid Fire rounds</p>
             </div>
-
-            <!-- Feature 6 -->
-            <div class="feature-card feature-card-6">
-                <div class="feature-icon">🔔</div>
+            <div class="benefit-item">
+                <div class="benefit-icon">🔔</div>
                 <h3 data-i18n="welcome.feature6Title">Smart Reminders</h3>
-                <p data-i18n="welcome.feature6Desc">Never miss important tasks with our intelligent reminder system</p>
+                <p data-i18n="welcome.feature6Desc">Never miss important tasks</p>
             </div>
         </div>
     </section>
 
-    <!-- Benefits Section -->
-    <section class="benefits-section">
-        <h2 class="section-title" data-i18n="welcome.learningBenefits">Learning Benefits</h2>
-        
-        <div class="benefits-container">
-            <div class="benefit-item">
-                <div class="benefit-number">1</div>
-                <h3 data-i18n="welcome.benefit1">Interactive Learning</h3>
-                <p data-i18n="welcome.benefit1Desc">Engage with content through games and quizzes</p>
-            </div>
-
-            <div class="benefit-item">
-                <div class="benefit-number">2</div>
-                <h3 data-i18n="welcome.benefit2">Personal Development</h3>
-                <p data-i18n="welcome.benefit2Desc">Build skills and confidence at your own pace</p>
-            </div>
-
-            <div class="benefit-item">
-                <div class="benefit-number">3</div>
-                <h3 data-i18n="welcome.benefit3">Achievement Recognition</h3>
-                <p data-i18n="welcome.benefit3Desc">Earn badges and certificates for your accomplishments</p>
-            </div>
-
-            <div class="benefit-item">
-                <div class="benefit-number">4</div>
-                <h3 data-i18n="welcome.benefit4">Comprehensive Subjects</h3>
-                <p data-i18n="welcome.benefit4Desc">Master different subjects with our structured curriculum</p>
-            </div>
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stat-card">
+            <div class="stat-number">1000+</div>
+            <p>Questions</p>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">50+</div>
+            <p>Topics</p>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">4</div>
+            <p>Languages</p>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">∞</div>
+            <p>Fun</p>
         </div>
     </section>
 
-    <!-- Activities Preview Section -->
-    <section class="activities-section">
-        <h2 class="section-title" data-i18n="welcome.exploreActivities">Explore Our Activities</h2>
-        
-        <div class="activities-grid">
-            <a href="quiz.html" class="activity-box quiz-activity activity-link" title="Quiz">
-                <div class="activity-emoji">❓</div>
-                <p data-i18n="cards.quiz">Quiz</p>
-            </a>
-            <a href="puzzle.html" class="activity-box puzzle-activity activity-link" title="Puzzle">
-                <div class="activity-emoji">🧩</div>
-                <p data-i18n="cards.puzzle">Puzzle</p>
-            </a>
-            <a href="rapidfire.html" class="activity-box rapidfire-activity activity-link" title="Rapid Fire">
-                <div class="activity-emoji">⚡</div>
-                <p data-i18n="cards.rapidFire">Rapid Fire</p>
-            </a>
-            <a href="subjects.html" class="activity-box games-activity activity-link" title="Games">
-                <div class="activity-emoji">🎮</div>
-                <p data-i18n="cards.games">Games</p>
-            </a>
-            <a href="gallery.html" class="activity-box gallery-activity activity-link" title="Gallery">
-                <div class="activity-emoji">🖼️</div>
-                <p data-i18n="cards.gallery">Gallery</p>
-            </a>
-            <a href="camera.html" class="activity-box subjects-activity activity-link" title="Camera">
-                <div class="activity-emoji">📸</div>
-                <p>Camera</p>
-            </a>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials-section">
-        <h2 class="section-title" data-i18n="welcome.studentStories">Student Success Stories</h2>
-        
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <div class="testimonial-avatar">👧</div>
-                <p class="testimonial-text" data-i18n="welcome.testimonial1">"I love this platform! The games make learning so much fun!"</p>
-                <p class="testimonial-author">- Priya, Class 4</p>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-avatar">👦</div>
-                <p class="testimonial-text" data-i18n="welcome.testimonial2">"The quizzes help me practice and improve my scores!"</p>
-                <p class="testimonial-author">- Arjun, Class 5</p>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-avatar">👧</div>
-                <p class="testimonial-text" data-i18n="welcome.testimonial3">"I can learn in my own language! That's amazing!"</p>
-                <p class="testimonial-author">- Ananya, Class 6</p>
-            </div>
-
-            <div class="testimonial-card">
-                <div class="testimonial-avatar">👦</div>
-                <p class="testimonial-text" data-i18n="welcome.testimonial4">"Earning achievements motivates me to learn more!"</p>
-                <p class="testimonial-author">- Rohan, Class 5</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Terms & Conditions Section -->
-    <section class="terms-section">
-        <h2 class="section-title" data-i18n="welcome.termsTitle">Terms & Conditions</h2>
-        
-        <div class="terms-container">
-            <div class="terms-accordion">
-                <!-- Term 1 -->
-                <div class="accordion-item">
-                    <button class="accordion-header" data-i18n="welcome.term1Title">Student Privacy & Safety</button>
-                    <div class="accordion-content">
-                        <p data-i18n="welcome.term1Content">We protect your personal information with industry-standard security measures. Your data is never shared with third parties without parental consent. Parents can review and manage their child's profile at any time.</p>
-                    </div>
-                </div>
-
-                <!-- Term 2 -->
-                <div class="accordion-item">
-                    <button class="accordion-header" data-i18n="welcome.term2Title">Content Guidelines</button>
-                    <div class="accordion-content">
-                        <p data-i18n="welcome.term2Content">All educational content is carefully curated and age-appropriate. Our curriculum aligns with national educational standards. We update content regularly to reflect current best practices in education.</p>
-                    </div>
-                </div>
-
-                <!-- Term 3 -->
-                <div class="accordion-item">
-                    <button class="accordion-header" data-i18n="welcome.term3Title">User Responsibility</button>
-                    <div class="accordion-content">
-                        <p data-i18n="welcome.term3Content">Users agree to use this platform for educational purposes only. Respectful behavior is required in all interactions. Misuse, including hacking or inappropriate content, will result in account suspension.</p>
-                    </div>
-                </div>
-
-                <!-- Term 4 -->
-                <div class="accordion-item">
-                    <button class="accordion-header" data-i18n="welcome.term4Title">Parental Involvement</button>
-                    <div class="accordion-content">
-                        <p data-i18n="welcome.term4Content">We encourage parents to stay involved in their children's learning journey. Parents receive progress reports and can set time limits. Parent accounts have full visibility into learning activities and achievements.</p>
-                    </div>
-                </div>
-
-                <!-- Term 5 -->
-                <div class="accordion-item">
-                    <button class="accordion-header" data-i18n="welcome.term5Title">Fair Use Policy</button>
-                    <div class="accordion-content">
-                        <p data-i18n="welcome.term5Content">Users may not reproduce, distribute, or transmit any content without permission. Commercial use of platform materials is prohibited. Educational sharing within your school/family is permitted.</p>
-                    </div>
-                </div>
-
-                <!-- Term 6 -->
-                <div class="accordion-item">
-                    <button class="accordion-header" data-i18n="welcome.term6Title">Disclaimer</button>
-                    <div class="accordion-content">
-                        <p data-i18n="welcome.term6Content">This platform is provided "as is" without warranties. We strive for accuracy but cannot guarantee all information. Users assume responsibility for evaluating the appropriateness of information for their needs.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="terms-checkbox">
-                <label class="checkbox-label">
-                    <input type="checkbox" id="agreeTerms" name="agreeTerms">
-                    <span data-i18n="welcome.agreeTerms">I have read and agree to the Terms & Conditions</span>
-                </label>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action Section -->
-    <section class="cta-section">
-        <div class="cta-content">
-            <h2 data-i18n="welcome.readyToLearn">Ready to Start Your Learning Journey?</h2>
-            <p data-i18n="welcome.ctaDescription">Join thousands of students who are already learning and achieving their goals!</p>
-            <button class="btn-login-large" id="loginBtnCTA" data-i18n="welcome.loginNow">Login Now</button>
-        </div>
+    <!-- Call to Action -->
+    <section class="welcome-cta">
+        <h2 data-i18n="welcome.readyToStart">Ready to Start?</h2>
+        <p data-i18n="welcome.ctaDescription">Join thousands of students learning smarter</p>
+        <a href="login.html" class="btn btn-xl" data-i18n="welcome.loginNow">Login Now</a>
     </section>
 
     <!-- Footer -->
     <footer class="welcome-footer">
-        <div class="footer-content">
-            <p data-i18n="welcome.footerText">&copy; 2024 Smart School Learning Portal. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#" data-i18n="welcome.privacyPolicy">Privacy Policy</a>
-                <span class="divider">•</span>
-                <a href="#" data-i18n="welcome.contactUs">Contact Us</a>
-                <span class="divider">•</span>
-                <a href="#" data-i18n="welcome.about">About Us</a>
-            </div>
-        </div>
+        <p>&copy; 2026 Smart School Learning Portal. All rights reserved.</p>
     </footer>
 
-    <!-- Login Modal -->
-    <div id="loginModal" class="login-modal">
-        <div class="modal-content">
-            <button class="modal-close" id="closeLoginModal">&times;</button>
-            
-            <div class="modal-header">
-                <div class="modal-logo">📚</div>
-                <h2 class="modal-title">Smart School Login</h2>
-                <p class="modal-subtitle">Enter your credentials to continue</p>
-            </div>
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-light: #f9fafb;
+            --border-color: #e5e7eb;
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
 
-            <!-- Login/Signup Tabs -->
-            <div class="modal-tabs">
-                <button class="modal-tab-btn active" id="modalLoginTab">Login</button>
-                <button class="modal-tab-btn" id="modalSignupTab">Sign Up</button>
-            </div>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: var(--text-primary); }
 
-            <!-- Login Form -->
-            <div class="modal-form-content active" id="modalLoginForm">
-                <form class="login-form" id="welcomeLoginForm">
-                    <div class="form-group">
-                        <label for="modalLoginEmail">Email Address</label>
-                        <input type="email" id="modalLoginEmail" name="email" placeholder="Enter your email" required>
-                        <span class="form-error"></span>
-                    </div>
+        /* Header Styles */
+        .welcome-header {
+            position: sticky; top: 0; z-index: 100;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white; padding: 1rem 0; box-shadow: var(--shadow-md);
+        }
 
-                    <div class="form-group">
-                        <label for="modalLoginPassword">Password</label>
-                        <input type="password" id="modalLoginPassword" name="password" placeholder="Enter your password" required>
-                        <span class="form-error"></span>
-                    </div>
+        .header-container {
+            max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
 
-                    <div class="remember-forgot">
-                        <label class="remember-me">
-                            <input type="checkbox" id="modalRememberMe" name="rememberMe">
-                            <span>Remember me</span>
-                        </label>
-                        <a href="#" class="forgot-password">Forgot Password?</a>
-                    </div>
+        .logo-section {
+            display: flex; align-items: center; gap: 0.75rem;
+            text-decoration: none; color: white;
+        }
 
-                    <button type="submit" class="login-submit-btn">Sign In</button>
-                </form>
-            </div>
+        .logo-icon { font-size: 2rem; }
+        .logo-section h1 { margin: 0; font-size: 1.5rem; font-weight: 700; }
 
-            <!-- Signup Form -->
-            <div class="modal-form-content" id="modalSignupForm">
-                <form class="login-form" id="welcomeSignupForm">
-                    <div class="form-group">
-                        <label for="modalSignupName">Full Name</label>
-                        <input type="text" id="modalSignupName" name="name" placeholder="Enter your full name" required>
-                        <span class="form-error"></span>
-                    </div>
+        .header-container .btn {
+            background: rgba(255,255,255,0.2); border: 2px solid white;
+            color: white; padding: 0.6rem 1.5rem; border-radius: 8px;
+            transition: var(--transition); cursor: pointer; text-decoration: none;
+            display: inline-block;
+        }
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="modalSignupEmail">Email</label>
-                            <input type="email" id="modalSignupEmail" name="email" placeholder="Your email" required>
-                            <span class="form-error"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="modalSignupAge">Age</label>
-                            <input type="number" id="modalSignupAge" name="age" placeholder="Age" min="5" max="25" required>
-                            <span class="form-error"></span>
-                        </div>
-                    </div>
+        .header-container .btn:hover {
+            background: white; color: var(--primary-color);
+        }
 
-                    <div class="form-group">
-                        <label>Gender</label>
-                        <div class="radio-group">
-                            <label class="radio-item">
-                                <input type="radio" name="gender" value="male" required> Male
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="gender" value="female"> Female
-                            </label>
-                            <label class="radio-item">
-                                <input type="radio" name="gender" value="other"> Other
-                            </label>
-                        </div>
-                        <span class="form-error"></span>
-                    </div>
+        /* Hero Section */
+        .welcome-hero {
+            position: relative; min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #f5f3ff 0%, #f0f9ff 100%);
+            overflow: hidden; padding: 2rem;
+        }
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="modalSignupClass">Class</label>
-                            <select id="modalSignupClass" name="class" required>
-                                <option value="">Select Class</option>
-                                <option value="1">Class 1</option>
-                                <option value="2">Class 2</option>
-                                <option value="3">Class 3</option>
-                                <option value="4">Class 4</option>
-                                <option value="5">Class 5</option>
-                                <option value="6">Class 6</option>
-                                <option value="7">Class 7</option>
-                                <option value="8">Class 8</option>
-                                <option value="9">Class 9</option>
-                                <option value="10">Class 10</option>
-                            </select>
-                            <span class="form-error"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="modalSignupPassword">Password</label>
-                            <input type="password" id="modalSignupPassword" name="password" placeholder="Create password" required>
-                            <span class="form-error"></span>
-                        </div>
-                    </div>
+        .hero-background {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; z-index: 0;
+        }
 
-                    <button type="submit" class="login-submit-btn">Create Account</button>
-                </form>
-            </div>
-        </div>
-    </div>
+        .floating-blob {
+            position: absolute; border-radius: 50%;
+            filter: blur(40px); opacity: 0.4;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .blob-1 {
+            width: 300px; height: 300px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            top: -50px; right: -50px;
+        }
+
+        .blob-2 {
+            width: 200px; height: 200px;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            bottom: 100px; left: 50px; animation-delay: 5s;
+        }
+
+        .blob-3 {
+            width: 150px; height: 150px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            bottom: -50px; right: 100px; animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%,100% { transform: translate(0,0); }
+            25% { transform: translate(20px,-20px); }
+            50% { transform: translate(-20px,20px); }
+            75% { transform: translate(20px,20px); }
+        }
+
+        .hero-content {
+            text-align: center; z-index: 10; max-width: 600px;
+            animation: slideInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-emoji-large { font-size: 5rem; display: inline-block; margin-bottom: 1rem; }
+        .hero-title { font-size: 3rem; font-weight: 800; color: var(--primary-color); margin: 1rem 0; line-height: 1.2; }
+        .hero-subtitle { font-size: 1.5rem; color: var(--secondary-color); font-weight: 600; margin: 0.5rem 0; }
+        .hero-description { font-size: 1rem; color: var(--text-secondary); margin: 1.5rem 0; line-height: 1.6; }
+
+        .hero-buttons {
+            display: flex; gap: 1rem; margin-top: 2rem;
+            justify-content: center; flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem; border-radius: 8px;
+            border: none; font-size: 1rem; cursor: pointer;
+            text-decoration: none; display: inline-block;
+            transition: var(--transition); font-weight: 600;
+        }
+
+        .btn-lg { padding: 1rem 2.5rem; font-size: 1.1rem; border-radius: 12px; }
+        .btn-sm { padding: 0.5rem 1.5rem; font-size: 0.9rem; width: 100%; }
+        .btn-xl { padding: 1.2rem 3rem; font-size: 1.2rem; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white; border: none;
+        }
+
+        .btn-primary:hover { transform: translateY(-4px); box-shadow: 0 6px 20px rgba(99,102,241,0.6); }
+
+        .btn-outline {
+            background: transparent; border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color); color: white;
+        }
+
+        .hero-preview {
+            display: flex; gap: 1.5rem; margin-top: 4rem;
+            justify-content: center; flex-wrap: wrap;
+        }
+
+        .preview-card {
+            background: white; padding: 1.5rem; border-radius: 16px;
+            box-shadow: var(--shadow-lg); text-align: center;
+            min-width: 100px; cursor: pointer; transition: var(--transition);
+        }
+
+        .preview-card:hover { transform: translateY(-8px) scale(1.05); }
+        .preview-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .preview-card p { margin: 0; font-weight: 600; color: var(--text-primary); }
+
+        /* Feature Glimpses Section */
+        .feature-glimpses, .why-choose-us {
+            padding: 5rem 2rem; max-width: 1200px; margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem; font-weight: 800; text-align: center;
+            color: var(--primary-color); margin-bottom: 3rem;
+        }
+
+        .glimpses-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .glimpse-card {
+            background: white; border-radius: 16px; padding: 2rem;
+            box-shadow: var(--shadow-md); transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .glimpse-card:hover {
+            transform: translateY(-8px); border-color: var(--primary-color);
+            box-shadow: 0 15px 35px rgba(99,102,241,0.2);
+        }
+
+        .glimpse-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+        .glimpse-icon { font-size: 2.5rem; }
+        .glimpse-card h3 { margin: 0; font-size: 1.3rem; color: var(--text-primary); }
+        .glimpse-card p { color: var(--text-secondary); margin: 0.5rem 0 1.5rem 0; line-height: 1.6; }
+
+        .glimpse-preview {
+            background: linear-gradient(135deg, #f5f3ff, #f0f9ff);
+            border-radius: 12px; padding: 1.5rem; min-height: 100px;
+            margin: 1.5rem 0; display: flex; align-items: center; justify-content: center;
+        }
+
+        .quiz-question { font-weight: 600; text-align: center; margin-bottom: 1rem; }
+        .quiz-options { display: flex; gap: 0.5rem; justify-content: center; }
+        .option { background: white; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.9rem; }
+
+        .puzzle-grid, .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+        .puzzle-piece, .gallery-thumb {
+            border-radius: 8px; height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .rapid-timer { display: flex; justify-content: center; }
+        .timer-circle {
+            width: 80px; height: 80px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: 800; animation: pulse 2s ease-in-out infinite;
+        }
+
+        .reminder-list, .subjects-list { display: flex; flex-direction: column; gap: 0.5rem; }
+        .reminder-item, .subject-item { padding: 0.75rem; background: white; border-radius: 6px; }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-item {
+            text-align: center; padding: 2rem; background: white;
+            border-radius: 16px; box-shadow: var(--shadow-md); transition: var(--transition);
+        }
+
+        .benefit-item:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+        .benefit-icon { font-size: 3rem; margin-bottom: 1rem; animation: bounce 2s infinite; }
+        .benefit-item h3 { color: var(--text-primary); margin: 1rem 0 0.5rem 0; }
+        .benefit-item p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+
+        /* Stats Section */
+        .stats-section {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem; padding: 4rem 2rem; max-width: 1200px; margin: 0 auto;
+        }
+
+        .stat-card {
+            text-align: center; padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white; border-radius: 16px; box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover { transform: scale(1.05); }
+        .stat-number { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .stat-card p { margin: 0; font-size: 0.95rem; opacity: 0.9; }
+
+        /* CTA Section */
+        .welcome-cta {
+            padding: 5rem 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            text-align: center; color: white;
+        }
+
+        .welcome-cta h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .welcome-cta p { font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9; }
+        .btn-xl { background: white !important; color: var(--primary-color) !important; }
+        .btn-xl:hover { transform: scale(1.05) !important; }
+
+        /* Footer */
+        .welcome-footer {
+            background: var(--text-primary); color: white;
+            text-align: center; padding: 2rem; font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .animate-bounce { animation: bounce 2s infinite; }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container { padding: 0 1rem; }
+            .logo-section h1 { font-size: 1.2rem; }
+            .hero-title { font-size: 2rem; }
+            .section-title { font-size: 1.8rem; }
+            .btn-lg { width: 100%; }
+            .hero-buttons { flex-direction: column; }
+            .hero-preview { margin-top: 2rem; }
+        }
+
+        @media (max-width: 576px) {
+            .logo-section h1 { display: none; }
+            .hero-title { font-size: 1.5rem; }
+            .hero-emoji-large { font-size: 3rem; }
+            .hero-subtitle { font-size: 1.1rem; }
+            .hero-description { font-size: 0.9rem; }
+            .section-title { font-size: 1.5rem; }
+            .stat-number { font-size: 2rem; }
+            .welcome-cta h2 { font-size: 1.8rem; }
+            .preview-card { min-width: 80px; }
+        }
+    </style>
 
     <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/storage.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/welcome.js"></script>
+
+    <script>
+        // Scroll to features
+        document.getElementById("scrollBtn")?.addEventListener("click", () => {
+            document.querySelector(".feature-glimpses").scrollIntoView({ behavior: "smooth" });
+        });
+
+        // Interactive hover effects
+        document.querySelectorAll(".glimpse-card").forEach(card => {
+            card.addEventListener("mouseenter", function() {
+                this.style.transform = "translateY(-8px) scale(1.02)";
+            });
+            card.addEventListener("mouseleave", function() {
+                this.style.transform = "translateY(0) scale(1)";
+            });
+        });
+
+        // Stagger animations on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.animation = `slideInUp 0.6s ease forwards`;
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll(".benefit-item, .stat-card").forEach(el => {
+            el.style.opacity = "0";
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
