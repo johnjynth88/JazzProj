@@ -1,5 +1,5 @@
 /* ============================================
-   SMART SCHOOL LEARNING PORTAL - MAIN APP
+   BLOOMED - MAIN APP
    ============================================ */
 
 class SmartSchoolPortal {
@@ -12,7 +12,7 @@ class SmartSchoolPortal {
   }
 
   async init() {
-    console.log('Initializing Smart School Learning Portal...');
+    console.log('Initializing BloomED...');
     
     // Load saved preferences
     this.loadPreferences();
@@ -101,7 +101,7 @@ class SmartSchoolPortal {
     this.translations = {
       english: {
         header: {
-          schoolName: "Smart Learning Portal",
+          schoolName: "BloomED",
           search: "Search...",
           language: "Language",
           country: "Country",
@@ -149,7 +149,7 @@ class SmartSchoolPortal {
       },
       french: {
         header: {
-          schoolName: "Portail d'apprentissage intelligent",
+          schoolName: "BloomED",
           search: "Rechercher...",
           language: "Langue",
           country: "Pays",
@@ -170,7 +170,7 @@ class SmartSchoolPortal {
       },
       tamil: {
         header: {
-          schoolName: "ஸ்மார்ட் கற்றல் போர்டல்",
+          schoolName: "BloomED",
           search: "தேடல்...",
           language: "மொழி",
           country: "நாடு",
@@ -191,7 +191,7 @@ class SmartSchoolPortal {
       },
       hindi: {
         header: {
-          schoolName: "स्मार्ट लर्निंग पोर्टल",
+          schoolName: "BloomED",
           search: "खोजें...",
           language: "भाषा",
           country: "देश",
@@ -421,13 +421,27 @@ class SmartSchoolPortal {
       });
     }
 
+    // Back button - navigate to previous page
+    const backBtn = document.querySelector('.header-actions .action-btn[title="Back"]');
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        // Try to go back in browser history, fallback to homepage if no history
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          window.location.href = 'index.html';
+        }
+      });
+    }
+
     // Close popover when clicking outside
     document.addEventListener('click', (e) => {
       const profilePopover = document.getElementById('profilePopover');
       const profileBtn = document.getElementById('profileBtn');
       if (profilePopover && profileBtn && 
           !profilePopover.contains(e.target) && 
-          !profileBtn.contains(e.target)) {
+          !profileBtn.contains(e.target) &&
+          !e.target.closest('.profile-btn')) {
         profilePopover.classList.remove('active');
       }
     });
@@ -508,14 +522,6 @@ class SmartSchoolPortal {
   showProfileMenu() {
     console.log('Show profile menu');
     // Profile menu to be implemented
-  }
-
-  logout() {
-    localStorage.removeItem('portal_user');
-    localStorage.removeItem('portal_reminders');
-    localStorage.removeItem('portal_gallery');
-    this.currentUser = null;
-    window.location.href = 'login.html';
   }
 
   initializeModules() {

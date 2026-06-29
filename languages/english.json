@@ -1,6 +1,6 @@
 {
   "header": {
-    "schoolName": "Smart Learning Portal",
+    "schoolName": "BloomED",
     "search": "Search...",
     "login": "Login",
     "profile": "Profile",
@@ -270,7 +270,7 @@
     "configure": "Configure"
   },
   "welcome": {
-    "mainTitle": "Welcome to Smart Learning Portal",
+    "mainTitle": "Welcome to BloomED",
     "subtitle": "Learn, Play, Achieve, and Explore New Possibilities!",
     "description": "Your gateway to an amazing educational journey filled with fun games, interactive quizzes, and incredible learning experiences",
     "getStarted": "Get Started - Login Here",
@@ -329,7 +329,7 @@
     "readyToLearn": "Ready to Start Your Learning Journey?",
     "ctaDescription": "Join thousands of students who are already learning and achieving their goals!",
     "loginNow": "Login Now",
-    "footerText": "© 2024 Smart School Learning Portal. All rights reserved.",
+    "footerText": "© 2024 BloomED. All rights reserved.",
     "privacyPolicy": "Privacy Policy",
     "contactUs": "Contact Us",
     "about": "About Us"

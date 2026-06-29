@@ -194,7 +194,7 @@ class StudyAssistant {
       'rapid work': '⚡ Rapid Fire is a timed quiz format with quick questions. Answer fast to get higher scores!',
       
       // Motivation & General Help
-      'hello': '👋 Hi there! Welcome to the Smart School Learning Portal. How can I help you learn better today?',
+      'hello': '👋 Hi there! Welcome to BloomED. How can I help you learn better today?',
       'hi': '👋 Hi! Ready to learn? I can help you navigate to any learning activity. What interests you?',
       'hi there': '👋 Hey! Great to see you! Let\'s make today\'s learning session productive. Where would you like to go?',
       

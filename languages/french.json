@@ -1,6 +1,6 @@
 {
   "header": {
-    "schoolName": "Portail d'apprentissage intelligent",
+    "schoolName": "BloomED",
     "search": "Rechercher...",
     "login": "Se connecter",
     "profile": "Profil",
@@ -270,7 +270,7 @@
     "configure": "Configurer"
   },
   "welcome": {
-    "mainTitle": "Bienvenue dans le Portail d'apprentissage intelligent",
+    "mainTitle": "Welcome to BloomED",
     "subtitle": "Apprenez, jouez, réussissez et explorez de nouvelles possibilités!",
     "description": "Votre porte d'entrée vers un incroyable parcours éducatif rempli de jeux amusants, de quiz interactifs et d'expériences d'apprentissage extraordinaires",
     "getStarted": "Commencer - Connectez-vous ici",

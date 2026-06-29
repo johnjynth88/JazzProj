@@ -1,4 +1,4 @@
-# 📚 Smart School Learning Portal
+# 📚 BloomED
 
 A comprehensive, modern, and responsive learning management system built with **HTML5, CSS3, and Vanilla JavaScript**. Designed for students with an attractive UI, multiple themes, and educational games.
 

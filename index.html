@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart School Learning Portal</title>
+    <title>BloomED</title>
     
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/main.css">
@@ -20,7 +20,7 @@
         <div class="header-container">
             <a href="index.html" class="logo-section">
                 <div class="logo-icon">📚</div>
-                <h1 data-i18n="header.schoolName">Smart Learning Portal</h1>
+                <h1 data-i18n="header.schoolName">BloomED</h1>
             </a>
 
             <div class="header-middle">
@@ -143,63 +143,152 @@
         </div>
 
         <!-- What Can I Do For You Section -->
-        <h2 data-i18n="home.whatCanIDo" class="mb-3">What can I do for you?</h2>
+        <h2 data-i18n="home.whatCanIDo" class="mb-3" style="font-size: 2.5rem; font-weight: 800; color: var(--primary-color); text-align: center; margin: 4rem 0 3rem 0;">What can I do for you?</h2>
         
-        <div class="grid-auto">
-            <!-- Quick Action Cards -->
-            <div class="card stagger-item hover-lift">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">📝</div>
-                <h3 data-i18n="cards.quiz">Quiz</h3>
-                <p data-i18n="cards.game" style="color: var(--text-secondary); font-size: 0.9rem;">Test your knowledge</p>
+        <div class="grid-auto" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+            <!-- Quiz Card -->
+            <div class="card stagger-item hover-lift" style="border: 2px solid transparent; transition: all 0.3s ease; border-radius: 16px;">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="font-size: 2.5rem;">❓</div>
+                    <h3 data-i18n="cards.quiz" style="margin: 0;">Quiz</h3>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0.5rem 0 1.5rem 0;">Test your knowledge with interactive quizzes</p>
+                <div style="background: linear-gradient(135deg, #f5f3ff, #f0f9ff); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; display: flex; align-items: center; justify-content: center; min-height: 100px;">
+                    <div style="text-align: center;">
+                        <div style="font-weight: 600; margin-bottom: 0.5rem;">Sample Question:</div>
+                        <div style="font-size: 0.9rem; margin-bottom: 0.5rem;">What is 2+2?</div>
+                        <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                            <div style="background: white; padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.85rem;">3</div>
+                            <div style="background: white; padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.85rem; font-weight: 700; color: var(--primary-color);">4</div>
+                            <div style="background: white; padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.85rem;">5</div>
+                        </div>
+                    </div>
+                </div>
                 <a href="quiz.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" data-i18n="common.start">Start</a>
             </div>
 
-            <div class="card stagger-item hover-lift">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🧩</div>
-                <h3 data-i18n="cards.puzzle">Puzzle</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">Solve interesting puzzles</p>
+            <!-- Puzzle Card -->
+            <div class="card stagger-item hover-lift" style="border: 2px solid transparent; transition: all 0.3s ease; border-radius: 16px;">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="font-size: 2.5rem;">🧩</div>
+                    <h3 data-i18n="cards.puzzle" style="margin: 0;">Puzzle</h3>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0.5rem 0 1.5rem 0;">Solve interesting puzzles that challenge you</p>
+                <div style="background: linear-gradient(135deg, #f5f3ff, #f0f9ff); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; display: flex; align-items: center; justify-content: center; min-height: 100px;">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+                        <div style="width: 40px; height: 40px; border-radius: 8px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));"></div>
+                        <div style="width: 40px; height: 40px; border-radius: 8px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));"></div>
+                        <div style="width: 40px; height: 40px; border-radius: 8px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));"></div>
+                        <div style="width: 40px; height: 40px; border-radius: 8px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));"></div>
+                    </div>
+                </div>
                 <a href="puzzle.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" data-i18n="common.start">Start</a>
             </div>
 
-            <div class="card stagger-item hover-lift">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">⚡</div>
-                <h3 data-i18n="cards.rapidFire">Rapid Fire</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">Quick quick questions</p>
+            <!-- Rapid Fire Card -->
+            <div class="card stagger-item hover-lift" style="border: 2px solid transparent; transition: all 0.3s ease; border-radius: 16px;">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="font-size: 2.5rem;">⚡</div>
+                    <h3 data-i18n="cards.rapidFire" style="margin: 0;">Rapid Fire</h3>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0.5rem 0 1.5rem 0;">Quick fire questions to test knowledge</p>
+                <div style="background: linear-gradient(135deg, #f5f3ff, #f0f9ff); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; display: flex; align-items: center; justify-content: center; min-height: 100px;">
+                    <div style="width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; animation: pulse 2s ease-in-out infinite;">10s</div>
+                </div>
                 <a href="rapidfire.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" data-i18n="common.start">Start</a>
             </div>
 
-            <div class="card stagger-item hover-lift">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">📷</div>
-                <h3 data-i18n="cards.camera">Camera</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">Capture moments</p>
+            <!-- Camera Card -->
+            <div class="card stagger-item hover-lift" style="border: 2px solid transparent; transition: all 0.3s ease; border-radius: 16px;">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="font-size: 2.5rem;">📷</div>
+                    <h3 data-i18n="cards.camera" style="margin: 0;">Camera</h3>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0.5rem 0 1.5rem 0;">Capture creative moments</p>
+                <div style="background: linear-gradient(135deg, #f5f3ff, #f0f9ff); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; display: flex; align-items: center; justify-content: center; min-height: 100px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📸</div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary);">Click to capture</div>
+                    </div>
+                </div>
                 <a href="camera.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" data-i18n="common.open">Open</a>
             </div>
 
-            <div class="card stagger-item hover-lift">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🖼️</div>
-                <h3 data-i18n="cards.gallery">Gallery</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">View your photos</p>
+            <!-- Gallery Card -->
+            <div class="card stagger-item hover-lift" style="border: 2px solid transparent; transition: all 0.3s ease; border-radius: 16px;">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="font-size: 2.5rem;">🖼️</div>
+                    <h3 data-i18n="cards.gallery" style="margin: 0;">Gallery</h3>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0.5rem 0 1.5rem 0;">Create and explore visual content</p>
+                <div style="background: linear-gradient(135deg, #f5f3ff, #f0f9ff); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; display: flex; align-items: center; justify-content: center; min-height: 100px;">
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem;">
+                        <div style="width: 40px; height: 40px; border-radius: 8px; background: linear-gradient(135deg, #ec4899, #f472b6);"></div>
+                        <div style="width: 40px; height: 40px; border-radius: 8px; background: linear-gradient(135deg, #06b6d4, #22d3ee);"></div>
+                        <div style="width: 40px; height: 40px; border-radius: 8px; background: linear-gradient(135deg, #8b5cf6, #d8b4fe);"></div>
+                        <div style="width: 40px; height: 40px; border-radius: 8px; background: linear-gradient(135deg, #f59e0b, #fcd34d);"></div>
+                    </div>
+                </div>
                 <a href="gallery.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" data-i18n="common.view">View</a>
             </div>
 
-            <div class="card stagger-item hover-lift">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">📋</div>
-                <h3 data-i18n="cards.reminder">Reminder</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">Manage tasks</p>
+            <!-- Reminder Card -->
+            <div class="card stagger-item hover-lift" style="border: 2px solid transparent; transition: all 0.3s ease; border-radius: 16px;">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="font-size: 2.5rem;">🔔</div>
+                    <h3 data-i18n="cards.reminder" style="margin: 0;">Reminder</h3>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0.5rem 0 1.5rem 0;">Manage tasks and never miss deadlines</p>
+                <div style="background: linear-gradient(135deg, #f5f3ff, #f0f9ff); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; display: flex; align-items: center; justify-content: center; min-height: 100px;">
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
+                        <div style="padding: 0.5rem; background: white; border-radius: 6px; font-size: 0.85rem;">✓ Complete homework</div>
+                        <div style="padding: 0.5rem; background: white; border-radius: 6px; font-size: 0.85rem;">✓ Study for exam</div>
+                        <div style="padding: 0.5rem; background: white; border-radius: 6px; font-size: 0.85rem;">✓ Project work</div>
+                    </div>
+                </div>
                 <a href="reminder.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" data-i18n="common.manage">Manage</a>
             </div>
 
-            <div class="card stagger-item hover-lift">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">📚</div>
-                <h3 data-i18n="cards.subjects">Subjects</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">Learn subjects</p>
+            <!-- Subjects Card -->
+            <div class="card stagger-item hover-lift" style="border: 2px solid transparent; transition: all 0.3s ease; border-radius: 16px;">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="font-size: 2.5rem;">📖</div>
+                    <h3 data-i18n="cards.subjects" style="margin: 0;">Subjects</h3>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0.5rem 0 1.5rem 0;">Comprehensive learning materials for all</p>
+                <div style="background: linear-gradient(135deg, #f5f3ff, #f0f9ff); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; display: flex; align-items: center; justify-content: center; min-height: 100px;">
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
+                        <div style="padding: 0.5rem; background: white; border-radius: 6px; font-size: 0.85rem;">📐 Mathematics</div>
+                        <div style="padding: 0.5rem; background: white; border-radius: 6px; font-size: 0.85rem;">🔬 Science</div>
+                        <div style="padding: 0.5rem; background: white; border-radius: 6px; font-size: 0.85rem;">🌍 Languages</div>
+                    </div>
+                </div>
                 <a href="subjects.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" data-i18n="common.explore">Explore</a>
             </div>
 
-            <div class="card stagger-item hover-lift">
-                <div style="font-size: 2.5rem; margin-bottom: 1rem;">⚙️</div>
-                <h3 data-i18n="cards.settings">Settings</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">Customize experience</p>
+            <!-- Settings Card -->
+            <div class="card stagger-item hover-lift" style="border: 2px solid transparent; transition: all 0.3s ease; border-radius: 16px;">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="font-size: 2.5rem;">⚙️</div>
+                    <h3 data-i18n="cards.settings" style="margin: 0;">Settings</h3>
+                </div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0.5rem 0 1.5rem 0;">Customize your experience</p>
+                <div style="background: linear-gradient(135deg, #f5f3ff, #f0f9ff); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; display: flex; align-items: center; justify-content: center; min-height: 100px;">
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; margin-bottom: 0.25rem;">🌙</div>
+                            <div style="font-size: 0.75rem;">Theme</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; margin-bottom: 0.25rem;">🌐</div>
+                            <div style="font-size: 0.75rem;">Language</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; margin-bottom: 0.25rem;">🔔</div>
+                            <div style="font-size: 0.75rem;">Notifications</div>
+                        </div>
+                    </div>
+                </div>
                 <a href="settings.html" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" data-i18n="common.configure">Configure</a>
             </div>
         </div>
